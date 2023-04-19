@@ -1,9 +1,13 @@
+import NavLeft from './components/NavLeft'
+import NavTop from './components/NavTop'
+
 function App() {
   return (
     <div className="App">
-      <p>sportSee</p>
+      <NavTop />
+      <NavLeft />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
