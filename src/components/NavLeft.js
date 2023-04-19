@@ -28,7 +28,7 @@ const Copyright = styled.p`
   white-space: nowrap;
 `
 
-function NavLeft({ iconSrc, iconAlt }) {
+function NavLeft() {
   return (
     <NavLeftContainer className="navleft">
       <NavLeftIcons>
