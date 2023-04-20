@@ -5,10 +5,15 @@ const IconNavBox = styled.li`
   position: relative;
   width: 64px;
   height: 64px;
-  background-color: #020203;
   border-radius: 6px;
   background-color: #fff;
   margin: 20px 0;
+  cursor: pointer;
+  transition: 0.1s background-color ease-in-out;
+  &:hover {
+    background-color: #ededed;
+    transition: 0.1s background-color ease-in-out;
+  }
 `
 const IconFig = styled.figure`
   width: 40px;
