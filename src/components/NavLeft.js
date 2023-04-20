@@ -23,7 +23,7 @@ const Copyright = styled.p`
   font-weight: 500px;
   transform: rotate(270deg);
   position: absolute;
-  bottom: 90px;
+  bottom: 87px;
   left: -15px;
   white-space: nowrap;
 `

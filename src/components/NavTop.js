@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { iconCyclisme } from '../utils/icons'
 
 const NavTopContainer = styled.header`
   position: absolute;
@@ -35,8 +34,12 @@ const NavTopMenuUl = styled.ul`
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
+  max-width: 1000px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
   height: 100%;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 24px;
   font-weight: 400;
 `
@@ -52,7 +55,6 @@ function NavTop() {
           src={'./assets/logo_sportsee.svg'}
           alt={'logo sportSee'}
         ></LogoImg>
-        <div>{() => iconCyclisme()}</div>
       </LogoFig>
       <NavTopMenu>
         <NavTopMenuUl>
