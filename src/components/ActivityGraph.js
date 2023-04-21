@@ -7,6 +7,7 @@ const ActivityWrapper = styled.article`
   height: calc(55% - 10px);
   width: 100%;
   background: pink;
+  border-radius: 5px;
 `
 
 function ActivityGraph() {

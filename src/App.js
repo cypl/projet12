@@ -31,7 +31,7 @@ const ContainerGraph = styled.div`
   left: 0;
   bottom: 0;
   height: 100%;
-  width: calc(82% - 10px);
+  width: calc(80% - 10px);
 `
 
 function App() {
