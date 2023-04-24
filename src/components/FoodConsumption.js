@@ -59,14 +59,14 @@ const FoodConsTxt2 = styled.p`
   color: #74798c;
 `
 
-function FoodConsumption() {
+function FoodConsumption({ calories, proteines, glucides, lipides }) {
   return (
     <AsideUser>
       <FoodCons>
         <FoodConsContainer>
           <FoodConsIconWrapper></FoodConsIconWrapper>
           <FoodConsTxt>
-            <FoodConsTxt1>1,930kCal</FoodConsTxt1>
+            <FoodConsTxt1>{calories}kCal</FoodConsTxt1>
             <FoodConsTxt2>Calories</FoodConsTxt2>
           </FoodConsTxt>
         </FoodConsContainer>
@@ -75,7 +75,7 @@ function FoodConsumption() {
         <FoodConsContainer>
           <FoodConsIconWrapper></FoodConsIconWrapper>
           <FoodConsTxt>
-            <FoodConsTxt1>155g</FoodConsTxt1>
+            <FoodConsTxt1>{proteines}g</FoodConsTxt1>
             <FoodConsTxt2>Protéines</FoodConsTxt2>
           </FoodConsTxt>
         </FoodConsContainer>
@@ -84,7 +84,7 @@ function FoodConsumption() {
         <FoodConsContainer>
           <FoodConsIconWrapper></FoodConsIconWrapper>
           <FoodConsTxt>
-            <FoodConsTxt1>290g</FoodConsTxt1>
+            <FoodConsTxt1>{glucides}g</FoodConsTxt1>
             <FoodConsTxt2>Glucides</FoodConsTxt2>
           </FoodConsTxt>
         </FoodConsContainer>
@@ -93,7 +93,7 @@ function FoodConsumption() {
         <FoodConsContainer>
           <FoodConsIconWrapper></FoodConsIconWrapper>
           <FoodConsTxt>
-            <FoodConsTxt1>50g</FoodConsTxt1>
+            <FoodConsTxt1>{lipides}g</FoodConsTxt1>
             <FoodConsTxt2>Lipides</FoodConsTxt2>
           </FoodConsTxt>
         </FoodConsContainer>

@@ -13,8 +13,12 @@ const HeadingUser = styled.header`
   }
 `
 
-function HeadUser() {
-  return <HeadingUser></HeadingUser>
+function HeadUser({ firstName }) {
+  return (
+    <HeadingUser>
+      <p>{firstName}</p>
+    </HeadingUser>
+  )
 }
 
 export default HeadUser

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import HeadUser from './components/HeadUser'
 import NavLeft from './components/NavLeft'
 import NavTop from './components/NavTop'
@@ -5,6 +6,7 @@ import styled from 'styled-components'
 import InfosGraph from './components/InfosGraph'
 import FoodConsumption from './components/FoodConsumption'
 import ActivityGraph from './components/ActivityGraph'
+import { useFetchUserData } from './api/api'
 
 const Main = styled.main`
   position: absolute;
@@ -34,18 +36,59 @@ const ContainerGraph = styled.div`
   width: calc(80% - 10px);
 `
 
+// class UserData {
+//   constructor(id, userInfos, todayScore, keyData) {
+//     this.id = id
+//     this.userInfos = userInfos
+//     this.todayScore = todayScore
+//     this.keyData = keyData
+//   }
+// }
+
 function App() {
+  const idUser = 12 // 12 ou 18
+  const [dataUser, setDataUser] = useState({})
+  useFetchUserData(idUser, setDataUser)
+
+  // useEffect(() => {
+  //   async function fetchData(idUser) {
+  //     try {
+  //       const response = await fetch(`http://localhost:3000/user/${idUser}`)
+  //       const dataUser = await response.json()
+  //       setDataUser(
+  //         new UserData(
+  //           dataUser.data.id,
+  //           dataUser.data.userInfos,
+  //           dataUser.data.todayScore,
+  //           dataUser.data.keyData
+  //         )
+  //       )
+  //     } catch (error) {
+  //       console.log(error)
+  //     } finally {
+  //     }
+  //   }
+  //   fetchData(idUser)
+  // }, [idUser])
+
   return (
     <div className="App">
       <NavTop />
       <Main>
-        <HeadUser />
+        <HeadUser
+          firstName={dataUser.userInfos && dataUser.userInfos.firstName}
+        />
         <SectionUser>
           <ContainerGraph>
             <ActivityGraph />
             <InfosGraph />
           </ContainerGraph>
-          <FoodConsumption />
+          <FoodConsumption
+            calories={dataUser.keyData && dataUser.keyData.calorieCount}
+            proteines={dataUser.keyData && dataUser.keyData.proteinCount}
+            glucides={dataUser.keyData && dataUser.keyData.carbohydrateCount}
+            lipides={dataUser.keyData && dataUser.keyData.lipidCount}
+          />
         </SectionUser>
       </Main>
       <NavLeft />
