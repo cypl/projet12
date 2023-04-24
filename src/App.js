@@ -46,9 +46,17 @@ const ContainerGraph = styled.div`
 // }
 
 function App() {
-  const idUser = 12 // 12 ou 18
+  const [idUser, setUser] = useState(12) // 12 ou 18
   const [dataUser, setDataUser] = useState({})
   useFetchUserData(idUser, setDataUser)
+
+  function switchUser() {
+    if (idUser === 12) {
+      setUser(18)
+    } else {
+      setUser(12)
+    }
+  }
 
   // useEffect(() => {
   //   async function fetchData(idUser) {
@@ -77,6 +85,7 @@ function App() {
       <Main>
         <HeadUser
           firstName={dataUser.userInfos && dataUser.userInfos.firstName}
+          switchUser={switchUser}
         />
         <SectionUser>
           <ContainerGraph>
