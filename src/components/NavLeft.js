@@ -1,5 +1,8 @@
 import styled from 'styled-components'
-import IconNav from './IconNav'
+import { IconMeditation } from '../utils/icons'
+import { IconCyclisme } from '../utils/icons'
+import { IconNatation } from '../utils/icons'
+import { IconMusculation } from '../utils/icons'
 
 const NavLeftContainer = styled.footer`
   position: absolute;
@@ -17,6 +20,22 @@ const NavLeftIcons = styled.ul`
   left: 27px;
   transform: translate(0%, -50%);
 `
+const IconNavBox = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background-color: #fff;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: 0.1s background-color ease-in-out;
+  &:hover {
+    background-color: #ededed;
+    transition: 0.1s background-color ease-in-out;
+  }
+`
 const Copyright = styled.p`
   color: #fff;
   font-size: 12px;
@@ -32,16 +51,18 @@ function NavLeft() {
   return (
     <NavLeftContainer className="navleft">
       <NavLeftIcons>
-        <IconNav
-          iconSrc={'./assets/icon_meditation.png'}
-          iconAlt={'Méditation'}
-        />
-        <IconNav iconSrc={'./assets/icon_natation.png'} iconAlt={'Natation'} />
-        <IconNav iconSrc={'./assets/icon_cyclisme.png'} iconAlt={'Cyclisme'} />
-        <IconNav
-          iconSrc={'./assets/icon_musculation.png'}
-          iconAlt={'Musculation'}
-        />
+        <IconNavBox>
+          <IconMeditation color={'#e60000'} />
+        </IconNavBox>
+        <IconNavBox>
+          <IconNatation color={'#e60000'} />
+        </IconNavBox>
+        <IconNavBox>
+          <IconCyclisme color={'#e60000'} />
+        </IconNavBox>
+        <IconNavBox>
+          <IconMusculation color={'#e60000'} />
+        </IconNavBox>
       </NavLeftIcons>
       <Copyright>Copyright, SportSee 2023</Copyright>
     </NavLeftContainer>
