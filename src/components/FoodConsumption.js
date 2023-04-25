@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
 
 const UserFood = styled.aside`
@@ -71,7 +72,7 @@ const FoodTxt2 = styled.p`
   color: #74798c;
 `
 
-function FoodConsumption({ calories, proteines, glucides, lipides }) {
+function FoodConsumption({ calorie, protein, carbo, lipid }) {
   return (
     <UserFood>
       <Food>
@@ -81,7 +82,7 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
             <IconEnergy color={'#FF0000'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{calories}kCal</FoodTxt1>
+            <FoodTxt1>{calorie}kCal</FoodTxt1>
             <FoodTxt2>Calories</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -93,7 +94,7 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
             <IconProtein color={'#4AB8FF'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{proteines}g</FoodTxt1>
+            <FoodTxt1>{protein}g</FoodTxt1>
             <FoodTxt2>Protéines</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -105,7 +106,7 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
             <IconCarbo color={'#FDCC0C'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{glucides}g</FoodTxt1>
+            <FoodTxt1>{carbo}g</FoodTxt1>
             <FoodTxt2>Glucides</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -117,7 +118,7 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
             <IconLipid color={'#FD5181'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{lipides}g</FoodTxt1>
+            <FoodTxt1>{lipid}g</FoodTxt1>
             <FoodTxt2>Lipides</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -126,3 +127,10 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
   )
 }
 export default FoodConsumption
+
+FoodConsumption.propTypes = {
+  calorie: PropTypes.string,
+  protein: PropTypes.string,
+  carbo: PropTypes.string,
+  lipid: PropTypes.string,
+}

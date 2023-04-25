@@ -93,10 +93,10 @@ function App() {
             <InfosGraph />
           </ContainerGraph>
           <FoodConsumption
-            calories={dataUser.keyData && dataUser.keyData.calorieCount}
-            proteines={dataUser.keyData && dataUser.keyData.proteinCount}
-            glucides={dataUser.keyData && dataUser.keyData.carbohydrateCount}
-            lipides={dataUser.keyData && dataUser.keyData.lipidCount}
+            calorie={dataUser.keyData && dataUser.keyData.calorieCount}
+            protein={dataUser.keyData && dataUser.keyData.proteinCount}
+            carbo={dataUser.keyData && dataUser.keyData.carbohydrateCount}
+            lipid={dataUser.keyData && dataUser.keyData.lipidCount}
           />
         </SectionUser>
       </Main>
