@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import InfosGraph from './components/InfosGraph'
 import FoodConsumption from './components/FoodConsumption'
 import ActivityGraph from './components/ActivityGraph'
-import { useFetchUserData } from './api/api'
+import { useFetchUserData, useFetchUserActivity } from './api/api'
 
 const Main = styled.main`
   position: absolute;
@@ -36,20 +36,9 @@ const ContainerGraph = styled.div`
   width: calc(80% - 10px);
 `
 
-// class UserData {
-//   constructor(id, userInfos, todayScore, keyData) {
-//     this.id = id
-//     this.userInfos = userInfos
-//     this.todayScore = todayScore
-//     this.keyData = keyData
-//   }
-// }
-
 function App() {
+  // - set a user
   const [idUser, setUser] = useState(12) // 12 ou 18
-  const [dataUser, setDataUser] = useState({})
-  useFetchUserData(idUser, setDataUser)
-
   function switchUser() {
     if (idUser === 12) {
       setUser(18)
@@ -58,26 +47,15 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   async function fetchData(idUser) {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/user/${idUser}`)
-  //       const dataUser = await response.json()
-  //       setDataUser(
-  //         new UserData(
-  //           dataUser.data.id,
-  //           dataUser.data.userInfos,
-  //           dataUser.data.todayScore,
-  //           dataUser.data.keyData
-  //         )
-  //       )
-  //     } catch (error) {
-  //       console.log(error)
-  //     } finally {
-  //     }
-  //   }
-  //   fetchData(idUser)
-  // }, [idUser])
+  // - retrieves information from a user
+  const [dataUser, setDataUser] = useState({})
+  useFetchUserData(idUser, setDataUser)
+
+  // - retrieves activity from a user
+  const [dataActivity, setDataActivity] = useState({})
+  useFetchUserActivity(idUser, setDataActivity)
+
+  console.log(dataActivity.sessions)
 
   return (
     <div className="App">
@@ -89,7 +67,7 @@ function App() {
         />
         <SectionUser>
           <ContainerGraph>
-            <ActivityGraph />
+            <ActivityGraph data={dataActivity} />
             <InfosGraph />
           </ContainerGraph>
           <FoodConsumption

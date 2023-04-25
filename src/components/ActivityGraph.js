@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ActivityWrapper = styled.article`
   position: absolute;
@@ -10,7 +11,21 @@ const ActivityWrapper = styled.article`
   border-radius: 5px;
 `
 
-function ActivityGraph() {
-  return <ActivityWrapper></ActivityWrapper>
+function ActivityGraph({ data }) {
+  return (
+    <ActivityWrapper>
+      <p>{data.sessions && data.sessions[0].calories}</p>
+      <p>{data.sessions && data.sessions[1].calories}</p>
+      <p>{data.sessions && data.sessions[2].calories}</p>
+      <p>{data.sessions && data.sessions[3].calories}</p>
+      <p>{data.sessions && data.sessions[4].calories}</p>
+      <p>{data.sessions && data.sessions[5].calories}</p>
+      <p>{data.sessions && data.sessions[6].calories}</p>
+    </ActivityWrapper>
+  )
 }
 export default ActivityGraph
+
+ActivityGraph.propTypes = {
+  data: PropTypes.object,
+}
