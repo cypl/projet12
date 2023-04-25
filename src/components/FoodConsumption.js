@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
 
-const AsideUser = styled.aside`
+const UserFood = styled.aside`
   position: absolute;
   right: 0;
   bottom: 0;
   height: 100%;
   width: calc(20% - 10px);
 `
-const FoodCons = styled.article`
+const Food = styled.article`
   position: relative;
   height: calc(25% - 15px);
   margin-bottom: 20px;
@@ -18,7 +18,7 @@ const FoodCons = styled.article`
     margin-bottom: 0;
   }
 `
-const FoodConsContainer = styled.div`
+const FoodContainer = styled.div`
   position: absolute;
   height: 50px;
   width: calc(100% - 30px);
@@ -32,7 +32,7 @@ const FoodConsContainer = styled.div`
     left: 10px;
   }
 `
-const FoodConsIconWrapper = styled.div`
+const FoodIconWrapper = styled.div`
   position: absolute;
   height: 50px;
   width: 50px;
@@ -51,21 +51,21 @@ const FoodIconBg = styled.div`
   top: 0;
   opacity: 0.15;
 `
-const FoodConsTxt = styled.div`
+const FoodTxt = styled.div`
   position: absolute;
   height: 50px;
   width: calc(100% - 50px);
   right: 0;
   padding-left: 10px;
 `
-const FoodConsTxt1 = styled.p`
+const FoodTxt1 = styled.p`
   margin-top: 3px;
   font-size: 17px;
   line-height: 24px;
   font-weight: 700;
   color: #282d30;
 `
-const FoodConsTxt2 = styled.p`
+const FoodTxt2 = styled.p`
   font-size: 12px;
   line-height: 22px;
   color: #74798c;
@@ -73,56 +73,56 @@ const FoodConsTxt2 = styled.p`
 
 function FoodConsumption({ calories, proteines, glucides, lipides }) {
   return (
-    <AsideUser>
-      <FoodCons>
-        <FoodConsContainer>
-          <FoodConsIconWrapper>
+    <UserFood>
+      <Food>
+        <FoodContainer>
+          <FoodIconWrapper>
             <FoodIconBg style={{ backgroundColor: '#FF0000' }}></FoodIconBg>
             <IconEnergy color={'#FF0000'} />
-          </FoodConsIconWrapper>
-          <FoodConsTxt>
-            <FoodConsTxt1>{calories}kCal</FoodConsTxt1>
-            <FoodConsTxt2>Calories</FoodConsTxt2>
-          </FoodConsTxt>
-        </FoodConsContainer>
-      </FoodCons>
-      <FoodCons>
-        <FoodConsContainer>
-          <FoodConsIconWrapper>
+          </FoodIconWrapper>
+          <FoodTxt>
+            <FoodTxt1>{calories}kCal</FoodTxt1>
+            <FoodTxt2>Calories</FoodTxt2>
+          </FoodTxt>
+        </FoodContainer>
+      </Food>
+      <Food>
+        <FoodContainer>
+          <FoodIconWrapper>
             <FoodIconBg style={{ backgroundColor: '#4AB8FF' }}></FoodIconBg>
             <IconProtein color={'#4AB8FF'} />
-          </FoodConsIconWrapper>
-          <FoodConsTxt>
-            <FoodConsTxt1>{proteines}g</FoodConsTxt1>
-            <FoodConsTxt2>Protéines</FoodConsTxt2>
-          </FoodConsTxt>
-        </FoodConsContainer>
-      </FoodCons>
-      <FoodCons>
-        <FoodConsContainer>
-          <FoodConsIconWrapper>
+          </FoodIconWrapper>
+          <FoodTxt>
+            <FoodTxt1>{proteines}g</FoodTxt1>
+            <FoodTxt2>Protéines</FoodTxt2>
+          </FoodTxt>
+        </FoodContainer>
+      </Food>
+      <Food>
+        <FoodContainer>
+          <FoodIconWrapper>
             <FoodIconBg style={{ backgroundColor: '#FDCC0C' }}></FoodIconBg>
             <IconCarbo color={'#FDCC0C'} />
-          </FoodConsIconWrapper>
-          <FoodConsTxt>
-            <FoodConsTxt1>{glucides}g</FoodConsTxt1>
-            <FoodConsTxt2>Glucides</FoodConsTxt2>
-          </FoodConsTxt>
-        </FoodConsContainer>
-      </FoodCons>
-      <FoodCons>
-        <FoodConsContainer>
-          <FoodConsIconWrapper>
+          </FoodIconWrapper>
+          <FoodTxt>
+            <FoodTxt1>{glucides}g</FoodTxt1>
+            <FoodTxt2>Glucides</FoodTxt2>
+          </FoodTxt>
+        </FoodContainer>
+      </Food>
+      <Food>
+        <FoodContainer>
+          <FoodIconWrapper>
             <FoodIconBg style={{ backgroundColor: '#FD5181' }}></FoodIconBg>
             <IconLipid color={'#FD5181'} />
-          </FoodConsIconWrapper>
-          <FoodConsTxt>
-            <FoodConsTxt1>{lipides}g</FoodConsTxt1>
-            <FoodConsTxt2>Lipides</FoodConsTxt2>
-          </FoodConsTxt>
-        </FoodConsContainer>
-      </FoodCons>
-    </AsideUser>
+          </FoodIconWrapper>
+          <FoodTxt>
+            <FoodTxt1>{lipides}g</FoodTxt1>
+            <FoodTxt2>Lipides</FoodTxt2>
+          </FoodTxt>
+        </FoodContainer>
+      </Food>
+    </UserFood>
   )
 }
 export default FoodConsumption
