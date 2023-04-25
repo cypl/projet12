@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
 
 const AsideUser = styled.aside`
   position: absolute;
@@ -36,8 +37,19 @@ const FoodConsIconWrapper = styled.div`
   height: 50px;
   width: 50px;
   left: 0;
-  background: green;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`
+const FoodIconBg = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.15;
 `
 const FoodConsTxt = styled.div`
   position: absolute;
@@ -64,7 +76,10 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
     <AsideUser>
       <FoodCons>
         <FoodConsContainer>
-          <FoodConsIconWrapper></FoodConsIconWrapper>
+          <FoodConsIconWrapper>
+            <FoodIconBg style={{ backgroundColor: '#FF0000' }}></FoodIconBg>
+            <IconEnergy color={'#FF0000'} />
+          </FoodConsIconWrapper>
           <FoodConsTxt>
             <FoodConsTxt1>{calories}kCal</FoodConsTxt1>
             <FoodConsTxt2>Calories</FoodConsTxt2>
@@ -73,7 +88,10 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
       </FoodCons>
       <FoodCons>
         <FoodConsContainer>
-          <FoodConsIconWrapper></FoodConsIconWrapper>
+          <FoodConsIconWrapper>
+            <FoodIconBg style={{ backgroundColor: '#4AB8FF' }}></FoodIconBg>
+            <IconProtein color={'#4AB8FF'} />
+          </FoodConsIconWrapper>
           <FoodConsTxt>
             <FoodConsTxt1>{proteines}g</FoodConsTxt1>
             <FoodConsTxt2>Protéines</FoodConsTxt2>
@@ -82,7 +100,10 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
       </FoodCons>
       <FoodCons>
         <FoodConsContainer>
-          <FoodConsIconWrapper></FoodConsIconWrapper>
+          <FoodConsIconWrapper>
+            <FoodIconBg style={{ backgroundColor: '#FDCC0C' }}></FoodIconBg>
+            <IconCarbo color={'#FDCC0C'} />
+          </FoodConsIconWrapper>
           <FoodConsTxt>
             <FoodConsTxt1>{glucides}g</FoodConsTxt1>
             <FoodConsTxt2>Glucides</FoodConsTxt2>
@@ -91,7 +112,10 @@ function FoodConsumption({ calories, proteines, glucides, lipides }) {
       </FoodCons>
       <FoodCons>
         <FoodConsContainer>
-          <FoodConsIconWrapper></FoodConsIconWrapper>
+          <FoodConsIconWrapper>
+            <FoodIconBg style={{ backgroundColor: '#FD5181' }}></FoodIconBg>
+            <IconLipid color={'#FD5181'} />
+          </FoodConsIconWrapper>
           <FoodConsTxt>
             <FoodConsTxt1>{lipides}g</FoodConsTxt1>
             <FoodConsTxt2>Lipides</FoodConsTxt2>

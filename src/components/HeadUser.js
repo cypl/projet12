@@ -15,12 +15,12 @@ const HelloUser = styled.h1`
   font-size: 44px;
   line-height: 1;
   font-weight: 500;
-  margin-top: 30px;
+  margin-top: 35px;
 `
 const MessageUser = styled.p`
   line-height: 1.4;
   font-weight: 400;
-  margin-top: 15px;
+  margin-top: 12px;
 `
 const UserFirstName = styled.span`
   color: #e60000;
