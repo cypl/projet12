@@ -32,7 +32,7 @@ const IconNavBox = styled.li`
   cursor: pointer;
   transition: 0.1s background-color ease-in-out;
   &:hover {
-    background-color: #ededed;
+    background-color: #ffc5c5;
     transition: 0.1s background-color ease-in-out;
   }
 `
