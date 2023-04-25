@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import InfosGraph from '../components/InfosGraph'
 import FoodConsumption from '../components/FoodConsumption'
 import ActivityGraph from '../components/ActivityGraph'
-// import { useFetchUserData, useFetchUserActivity } from './api/api'
 import { useFetchUserData, useFetchUserActivity } from '../api/api'
 
 const Main = styled.main`
