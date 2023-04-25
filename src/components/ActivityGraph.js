@@ -7,7 +7,7 @@ const ActivityWrapper = styled.article`
   left: 0;
   height: calc(55% - 10px);
   width: 100%;
-  background: pink;
+  background: #ccc;
   border-radius: 5px;
 `
 
