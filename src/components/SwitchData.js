@@ -4,7 +4,7 @@ const SwitchWrapper = styled.div`
   width: 80px;
   height: 50px;
   position: absolute;
-  outline: 1px solid #ccc;
+  outline: 1px solid #ededed;
   border-radius: 4px;
   right: 0;
   top: 50%;
@@ -16,8 +16,8 @@ const SwitchSource = styled.div`
   top: 0;
   width: 100%;
   height: 25px;
-  background-color: #ccc;
-  color: #333;
+  background-color: #ededed;
+  color: #999;
   font-size: 10px;
   line-height: 25px;
   text-align: center;
@@ -28,23 +28,31 @@ const SourceMock = styled.div`
   height: 100%;
   width: 50%;
   left: 0;
-  background-color: #ccc;
+  background-color: #ededed;
   cursor: pointer;
+  &.active {
+    background-color: #e60000;
+    color: #fff;
+  }
 `
 const SourceBack = styled.div`
   position: absolute;
   height: 100%;
   width: 50%;
   right: 0;
-  background-color: #999;
+  background-color: #ededed;
   cursor: pointer;
+  &.active {
+    background-color: #e60000;
+    color: #fff;
+  }
 `
 const SwitchUser = styled.div`
   position: absolute;
   bottom: 0;
   height: 50%;
   width: 100%;
-  color: #333;
+  color: #999;
   font-size: 10px;
   line-height: 25px;
   text-align: center;
@@ -52,14 +60,29 @@ const SwitchUser = styled.div`
   cursor: pointer;
 `
 
-function SwitchData({ switchMockSource, switchBackSource }) {
+function SwitchData({
+  switchMockSource,
+  switchBackSource,
+  switchUser,
+  dataSource,
+}) {
   return (
     <SwitchWrapper>
       <SwitchSource>
-        <SourceMock onClick={switchMockSource}>Mock</SourceMock>
-        <SourceBack onClick={switchBackSource}>Back</SourceBack>
+        <SourceMock
+          onClick={switchMockSource}
+          className={dataSource === 'MOCK' && 'active'}
+        >
+          Mock
+        </SourceMock>
+        <SourceBack
+          onClick={switchBackSource}
+          className={dataSource === 'BACK' && 'active'}
+        >
+          Back
+        </SourceBack>
       </SwitchSource>
-      <SwitchUser>Switch user</SwitchUser>
+      <SwitchUser onClick={switchUser}>Switch user</SwitchUser>
     </SwitchWrapper>
   )
 }

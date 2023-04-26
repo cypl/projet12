@@ -26,19 +26,6 @@ const MessageUser = styled.p`
 const UserFirstName = styled.span`
   color: #e60000;
 `
-const SwitchUser = styled.span`
-  font-size: 11px;
-  line-height: 1;
-  color: #ddd;
-  font-weight: 400;
-  display: inline-block;
-  padding: 3px 4px;
-  border: 1px solid #ddd;
-  margin-left: 10px;
-  vertical-align: 5px;
-  border-radius: 3px;
-  cursor: pointer;
-`
 
 function HeadUser({
   firstName,
@@ -46,12 +33,12 @@ function HeadUser({
   switchUser,
   switchMockSource,
   switchBackSource,
+  dataSource,
 }) {
   return (
     <HeadingUser>
       <HelloUser>
         Bonjour <UserFirstName>{firstName}</UserFirstName>
-        <SwitchUser onClick={switchUser}>Switch user</SwitchUser>
       </HelloUser>
       <MessageUser>
         Félicitation ! Vous avez explosé vos objectifs hier 👏 score : {score}
@@ -59,6 +46,8 @@ function HeadUser({
       <SwitchData
         switchMockSource={switchMockSource}
         switchBackSource={switchBackSource}
+        switchUser={switchUser}
+        dataSource={dataSource}
       />
     </HeadingUser>
   )
