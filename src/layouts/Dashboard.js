@@ -40,6 +40,9 @@ const ContainerGraph = styled.div`
 function Dashboard() {
   // - set a user
   const [idUser, setUser] = useState(12) // 12 ou 18
+  // - set a data source
+  const [dataSource, setDataSource] = useState('MOCK') // MOCK ou BACK
+
   function switchUser() {
     if (idUser === 12) {
       setUser(18)
@@ -48,9 +51,20 @@ function Dashboard() {
     }
   }
 
+  function switchMockSource() {
+    if (dataSource === 'BACK') {
+      setDataSource('MOCK')
+    }
+  }
+  function switchBackSource() {
+    if (dataSource === 'MOCK') {
+      setDataSource('BACK')
+    }
+  }
+
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
-  useFetchUserData(idUser, setDataUser)
+  useFetchUserData(idUser, dataSource, setDataUser)
   const fUserData = new UserData(dataUser)
 
   // - retrieves activity from a user
@@ -64,6 +78,8 @@ function Dashboard() {
         <HeadUser
           firstName={fUserData.userInfos && fUserData.userInfos.firstName}
           switchUser={switchUser}
+          switchMockSource={switchMockSource}
+          switchBackSource={switchBackSource}
           score={fUserData && fUserData.todayScore}
         />
         <SectionUser>

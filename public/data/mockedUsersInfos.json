@@ -3,7 +3,7 @@
     "data": {
       "id": 12,
       "userInfos": {
-        "firstName": "Karl",
+        "firstName": "Karl *",
         "lastName": "Dovineau",
         "age": 31
       },
@@ -20,7 +20,7 @@
     "data": {
       "id": 18,
       "userInfos": {
-        "firstName": "Cecilia",
+        "firstName": "Cecilia *",
         "lastName": "Ratorez",
         "age": 34
       },

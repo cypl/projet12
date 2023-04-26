@@ -40,7 +40,13 @@ const SwitchUser = styled.span`
   cursor: pointer;
 `
 
-function HeadUser({ firstName, score, switchUser }) {
+function HeadUser({
+  firstName,
+  score,
+  switchUser,
+  switchMockSource,
+  switchBackSource,
+}) {
   return (
     <HeadingUser>
       <HelloUser>
@@ -50,7 +56,10 @@ function HeadUser({ firstName, score, switchUser }) {
       <MessageUser>
         Félicitation ! Vous avez explosé vos objectifs hier 👏 score : {score}
       </MessageUser>
-      <SwitchData />
+      <SwitchData
+        switchMockSource={switchMockSource}
+        switchBackSource={switchBackSource}
+      />
     </HeadingUser>
   )
 }

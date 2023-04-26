@@ -12,15 +12,23 @@ export default class UserData {
   }
 }
 
-export const useFetchUserData = (id, setData) => {
+export const useFetchUserData = (id, dataSource, setData) => {
   useEffect(() => {
     async function fetchData(id) {
       try {
         // if MOCK :
-        const response = await fetch(`../data/mockedUsersInfos.json`)
-        const dataUsers = await response.json()
-        const dataUser = dataUsers[id]
-        setData(dataUser.data)
+        if (dataSource === 'MOCK') {
+          const response = await fetch(`../data/mockedUsersInfos.json`)
+          const dataUsers = await response.json()
+          const dataUser = dataUsers[id]
+          setData(dataUser.data)
+        }
+        // if BACK :
+        else {
+          const response = await fetch(`http://localhost:3000/user/${id}`)
+          const dataUser = await response.json()
+          setData(dataUser.data)
+        }
         // if BACK :
 
         // const response = await fetch(`http://localhost:3000/user/${id}`)
@@ -39,7 +47,7 @@ export const useFetchUserData = (id, setData) => {
       }
     }
     fetchData(id)
-  }, [id, setData])
+  }, [id, dataSource, setData])
 }
 
 /**

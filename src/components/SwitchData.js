@@ -52,12 +52,12 @@ const SwitchUser = styled.div`
   cursor: pointer;
 `
 
-function SwitchData() {
+function SwitchData({ switchMockSource, switchBackSource }) {
   return (
     <SwitchWrapper>
       <SwitchSource>
-        <SourceMock>Mock</SourceMock>
-        <SourceBack>Back</SourceBack>
+        <SourceMock onClick={switchMockSource}>Mock</SourceMock>
+        <SourceBack onClick={switchBackSource}>Back</SourceBack>
       </SwitchSource>
       <SwitchUser>Switch user</SwitchUser>
     </SwitchWrapper>
