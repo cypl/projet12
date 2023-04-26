@@ -16,31 +16,19 @@ export const useFetchUserData = (id, dataSource, setData) => {
   useEffect(() => {
     async function fetchData(id) {
       try {
-        // if MOCK :
+        // if dataSource is MOCK :
         if (dataSource === 'MOCK') {
           const response = await fetch(`../data/mockedUsersInfos.json`)
           const dataUsers = await response.json()
           const dataUser = dataUsers[id]
           setData(dataUser.data)
         }
-        // if BACK :
+        // if dataSource is BACK :
         else {
           const response = await fetch(`http://localhost:3000/user/${id}`)
           const dataUser = await response.json()
           setData(dataUser.data)
         }
-        // if BACK :
-
-        // const response = await fetch(`http://localhost:3000/user/${id}`)
-        // const dataUser = await response.json()
-        // setData(
-        //   new UserData(
-        //     dataUser.data.id,
-        //     dataUser.data.userInfos,
-        //     dataUser.data.todayScore,
-        //     dataUser.data.keyData
-        //   )
-        // )
       } catch (error) {
         console.log(error)
       } finally {
