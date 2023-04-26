@@ -6,8 +6,8 @@ import styled from 'styled-components'
 import InfosGraph from '../components/InfosGraph'
 import FoodConsumption from '../components/FoodConsumption'
 import ActivityGraph from '../components/ActivityGraph'
-import { useFetchUserData, useFetchUserActivity } from '../api/api'
-import UserData from '../api/api'
+import { useFetch } from '../api/api'
+import { UserData, UserDataActivity } from '../dataModels/dataModels'
 
 const Main = styled.main`
   position: absolute;
@@ -58,12 +58,25 @@ function Dashboard() {
 
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
-  useFetchUserData(idUser, dataSource, setDataUser)
+  useFetch(
+    idUser,
+    `../data/mockedUsersInfos.json`,
+    `http://localhost:3000/user/${idUser}`,
+    dataSource,
+    setDataUser
+  )
   const fUserData = new UserData(dataUser)
 
   // - retrieves activity from a user
   const [dataActivity, setDataActivity] = useState({})
-  useFetchUserActivity(idUser, setDataActivity)
+  useFetch(
+    idUser,
+    `../data/mockedUsersActivity.json`,
+    `http://localhost:3000/user/${idUser}/activity`,
+    dataSource,
+    setDataActivity
+  )
+  const fUserDataActivity = new UserDataActivity(dataActivity)
 
   return (
     <div className="App">
@@ -79,7 +92,7 @@ function Dashboard() {
         />
         <SectionUser>
           <ContainerGraph>
-            <ActivityGraph data={dataActivity} />
+            <ActivityGraph data={fUserDataActivity} />
             <InfosGraph />
           </ContainerGraph>
           <FoodConsumption

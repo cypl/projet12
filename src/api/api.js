@@ -1,31 +1,28 @@
 import { useEffect } from 'react'
 
 /**
- * retrieves information from a user
+ *
+ * @param {*} id
+ * @param {*} pathMock
+ * @param {*} patchBack
+ * @param {*} dataSource
+ * @param {*} setData
  */
-export default class UserData {
-  constructor(data) {
-    this.id = data.id
-    this.userInfos = data.userInfos
-    this.todayScore = data.todayScore ?? data.score
-    this.keyData = data.keyData
-  }
-}
 
-export const useFetchUserData = (id, dataSource, setData) => {
+export const useFetch = (id, pathMock, patchBack, dataSource, setData) => {
   useEffect(() => {
     async function fetchData(id) {
       try {
         // if dataSource is MOCK :
         if (dataSource === 'MOCK') {
-          const response = await fetch(`../data/mockedUsersInfos.json`)
+          const response = await fetch(pathMock)
           const dataUsers = await response.json()
           const dataUser = dataUsers[id]
           setData(dataUser.data)
         }
         // if dataSource is BACK :
         else {
-          const response = await fetch(`http://localhost:3000/user/${id}`)
+          const response = await fetch(patchBack)
           const dataUser = await response.json()
           setData(dataUser.data)
         }
@@ -35,32 +32,5 @@ export const useFetchUserData = (id, dataSource, setData) => {
       }
     }
     fetchData(id)
-  }, [id, dataSource, setData])
-}
-
-/**
- * retrieves activity from a user
- */
-class UserActivity {
-  constructor(id, sessions) {
-    this.id = id
-    this.sessions = sessions
-  }
-}
-export const useFetchUserActivity = (id, setData) => {
-  useEffect(() => {
-    async function fetchData(id) {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/user/${id}/activity`
-        )
-        const dataUser = await response.json()
-        setData(new UserActivity(dataUser.data.id, dataUser.data.sessions))
-      } catch (error) {
-        console.log(error)
-      } finally {
-      }
-    }
-    fetchData(id)
-  }, [id, setData])
+  }, [id, pathMock, patchBack, dataSource, setData])
 }
