@@ -7,6 +7,7 @@ import InfosGraph from '../components/InfosGraph'
 import FoodConsumption from '../components/FoodConsumption'
 import ActivityGraph from '../components/ActivityGraph'
 import { useFetchUserData, useFetchUserActivity } from '../api/api'
+import UserData from '../api/api'
 
 const Main = styled.main`
   position: absolute;
@@ -14,7 +15,7 @@ const Main = styled.main`
   left: 110px;
   width: calc(100% - 110px);
   height: calc(100% - 90px);
-  background-color: #fff;
+  background-color: #fUserData;
 `
 const SectionUser = styled.section`
   position: absolute;
@@ -50,20 +51,20 @@ function Dashboard() {
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
   useFetchUserData(idUser, setDataUser)
+  const fUserData = new UserData(dataUser)
 
   // - retrieves activity from a user
   const [dataActivity, setDataActivity] = useState({})
   useFetchUserActivity(idUser, setDataActivity)
-
-  console.log(dataActivity.sessions)
 
   return (
     <div className="App">
       <NavTop />
       <Main>
         <HeadUser
-          firstName={dataUser.userInfos && dataUser.userInfos.firstName}
+          firstName={fUserData.userInfos && fUserData.userInfos.firstName}
           switchUser={switchUser}
+          score={fUserData && fUserData.todayScore}
         />
         <SectionUser>
           <ContainerGraph>
@@ -71,10 +72,10 @@ function Dashboard() {
             <InfosGraph />
           </ContainerGraph>
           <FoodConsumption
-            calorie={dataUser.keyData && dataUser.keyData.calorieCount}
-            protein={dataUser.keyData && dataUser.keyData.proteinCount}
-            carbo={dataUser.keyData && dataUser.keyData.carbohydrateCount}
-            lipid={dataUser.keyData && dataUser.keyData.lipidCount}
+            calorie={fUserData.keyData && fUserData.keyData.calorieCount}
+            protein={fUserData.keyData && fUserData.keyData.proteinCount}
+            carbo={fUserData.keyData && fUserData.keyData.carbohydrateCount}
+            lipid={fUserData.keyData && fUserData.keyData.lipidCount}
           />
         </SectionUser>
       </Main>

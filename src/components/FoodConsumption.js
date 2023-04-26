@@ -129,8 +129,8 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
 export default FoodConsumption
 
 FoodConsumption.propTypes = {
-  calorie: PropTypes.string,
-  protein: PropTypes.string,
-  carbo: PropTypes.string,
-  lipid: PropTypes.string,
+  calorie: PropTypes.number,
+  protein: PropTypes.number,
+  carbo: PropTypes.number,
+  lipid: PropTypes.number,
 }

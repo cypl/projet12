@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import SwitchData from './SwitchData'
 
 const HeadingUser = styled.header`
   position: absolute;
@@ -39,7 +40,7 @@ const SwitchUser = styled.span`
   cursor: pointer;
 `
 
-function HeadUser({ firstName, switchUser }) {
+function HeadUser({ firstName, score, switchUser }) {
   return (
     <HeadingUser>
       <HelloUser>
@@ -47,8 +48,9 @@ function HeadUser({ firstName, switchUser }) {
         <SwitchUser onClick={switchUser}>Switch user</SwitchUser>
       </HelloUser>
       <MessageUser>
-        Félicitation ! Vous avez explosé vos objectifs hier 👏
+        Félicitation ! Vous avez explosé vos objectifs hier 👏 score : {score}
       </MessageUser>
+      <SwitchData />
     </HeadingUser>
   )
 }
