@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import SwitchData from './SwitchData'
 
 const HeadingUser = styled.header`
@@ -29,7 +30,6 @@ const UserFirstName = styled.span`
 
 function HeadUser({
   firstName,
-  score,
   switchUser,
   switchMockSource,
   switchBackSource,
@@ -41,7 +41,7 @@ function HeadUser({
         Bonjour <UserFirstName>{firstName}</UserFirstName>
       </HelloUser>
       <MessageUser>
-        Félicitation ! Vous avez explosé vos objectifs hier 👏 score : {score}
+        Félicitation ! Vous avez explosé vos objectifs hier 👏
       </MessageUser>
       <SwitchData
         switchMockSource={switchMockSource}
@@ -54,3 +54,11 @@ function HeadUser({
 }
 
 export default HeadUser
+
+HeadUser.propTypes = {
+  firstName: PropTypes.string,
+  switchUser: PropTypes.func,
+  switchMockSource: PropTypes.func,
+  switchBackSource: PropTypes.func,
+  dataSource: PropTypes.string,
+}

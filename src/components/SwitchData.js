@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const SwitchWrapper = styled.div`
   width: 80px;
@@ -103,3 +104,10 @@ function SwitchData({
 }
 
 export default SwitchData
+
+SwitchData.propTypes = {
+  switchUser: PropTypes.func,
+  switchMockSource: PropTypes.func,
+  switchBackSource: PropTypes.func,
+  dataSource: PropTypes.string,
+}
