@@ -87,7 +87,6 @@ function Dashboard() {
           switchUser={switchUser}
           switchMockSource={switchToMockSource}
           switchBackSource={switchToBackSource}
-          score={fUserData && fUserData.todayScore}
           dataSource={dataSource}
         />
         <SectionUser>

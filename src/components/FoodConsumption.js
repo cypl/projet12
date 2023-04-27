@@ -87,6 +87,7 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
           </FoodTxt>
         </FoodContainer>
       </Food>
+
       <Food>
         <FoodContainer>
           <FoodIconWrapper>
@@ -99,6 +100,7 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
           </FoodTxt>
         </FoodContainer>
       </Food>
+
       <Food>
         <FoodContainer>
           <FoodIconWrapper>
@@ -111,6 +113,7 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
           </FoodTxt>
         </FoodContainer>
       </Food>
+
       <Food>
         <FoodContainer>
           <FoodIconWrapper>

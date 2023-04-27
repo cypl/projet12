@@ -15,7 +15,7 @@ export class UserData {
  */
 export class UserDataActivity {
   constructor(data) {
-    this.id = data.id
+    this.id = data.userId
     this.sessions = data.sessions
   }
 }
