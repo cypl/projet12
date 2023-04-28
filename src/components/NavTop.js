@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 const NavTopContainer = styled.header`
   position: absolute;
@@ -44,7 +45,21 @@ const NavTopMenuUl = styled.ul`
   font-weight: 400;
 `
 const NavTopMenuItem = styled.li`
-  color: #fff;
+  & a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #000;
+    border-radius: 3px;
+    transition: 0.1s background-color ease-in-out;
+  }
+  & a:hover {
+    background-color: #191919;
+    transition: 0.1s background-color ease-in-out;
+  }
+  & a.active {
+    background-color: #191919;
+  }
 `
 
 function NavTop() {
@@ -58,10 +73,18 @@ function NavTop() {
       </LogoFig>
       <NavTopMenu>
         <NavTopMenuUl>
-          <NavTopMenuItem>Accueil</NavTopMenuItem>
-          <NavTopMenuItem>Profil</NavTopMenuItem>
-          <NavTopMenuItem>Réglages</NavTopMenuItem>
-          <NavTopMenuItem>Communauté</NavTopMenuItem>
+          <NavTopMenuItem>
+            <NavLink to="/">Accueil</NavLink>
+          </NavTopMenuItem>
+          <NavTopMenuItem>
+            <NavLink to="/profil">Profil</NavLink>
+          </NavTopMenuItem>
+          <NavTopMenuItem>
+            <NavLink to="/reglages">Réglages</NavLink>
+          </NavTopMenuItem>
+          <NavTopMenuItem>
+            <NavLink to="/communaute">Communauté</NavLink>
+          </NavTopMenuItem>
         </NavTopMenuUl>
       </NavTopMenu>
     </NavTopContainer>

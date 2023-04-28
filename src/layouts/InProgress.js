@@ -2,13 +2,13 @@ import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
 import ErrorSection from '../components/ErrorSection'
 
-function Error404() {
+function InProgress() {
   return (
     <div className="App">
       <NavTop />
       <ErrorSection
-        title={'404'}
-        errorText={"La page que vous recherchez n'existe pas."}
+        title={'En cours'}
+        errorText={'Cette page est en cours de construction.'}
         btnText={"Retour à l'accueil"}
         btnTarget={'/'}
       />
@@ -17,4 +17,4 @@ function Error404() {
   )
 }
 
-export default Error404
+export default InProgress

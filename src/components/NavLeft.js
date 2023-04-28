@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 import { IconMeditation } from '../utils/icons'
 import { IconCyclisme } from '../utils/icons'
 import { IconNatation } from '../utils/icons'
@@ -21,19 +22,27 @@ const NavLeftIcons = styled.ul`
   transform: translate(0%, -50%);
 `
 const IconNavBox = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 64px;
   height: 64px;
   border-radius: 6px;
-  background-color: #fff;
   margin: 20px 0;
-  cursor: pointer;
-  transition: 0.1s background-color ease-in-out;
-  &:hover {
+  overflow: hidden;
+  & a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    background-color: #fff;
+    transition: 0.1s background-color ease-in-out;
+  }
+  & a:hover {
     background-color: #ffc5c5;
     transition: 0.1s background-color ease-in-out;
+  }
+  & a.active {
+    background-color: #ffc5c5;
   }
 `
 const Copyright = styled.p`
@@ -52,16 +61,24 @@ function NavLeft() {
     <NavLeftContainer className="navleft">
       <NavLeftIcons>
         <IconNavBox>
-          <IconMeditation color={'#e60000'} />
+          <NavLink to="/yoga">
+            <IconMeditation color={'#e60000'} />
+          </NavLink>
         </IconNavBox>
         <IconNavBox>
-          <IconNatation color={'#e60000'} />
+          <NavLink to="/natation">
+            <IconNatation color={'#e60000'} />
+          </NavLink>
         </IconNavBox>
         <IconNavBox>
-          <IconCyclisme color={'#e60000'} />
+          <NavLink to="/cyclisme">
+            <IconCyclisme color={'#e60000'} />
+          </NavLink>
         </IconNavBox>
         <IconNavBox>
-          <IconMusculation color={'#e60000'} />
+          <NavLink to="/musculation">
+            <IconMusculation color={'#e60000'} />
+          </NavLink>
         </IconNavBox>
       </NavLeftIcons>
       <Copyright>Copyright, SportSee 2023</Copyright>
