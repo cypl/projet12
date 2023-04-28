@@ -32,7 +32,7 @@ function HeadUser({
   firstName,
   switchUser,
   switchMockSource,
-  switchBackSource,
+  switchDevSource,
   dataSource,
 }) {
   return (
@@ -45,7 +45,7 @@ function HeadUser({
       </MessageUser>
       <SwitchData
         switchMockSource={switchMockSource}
-        switchBackSource={switchBackSource}
+        switchDevSource={switchDevSource}
         switchUser={switchUser}
         dataSource={dataSource}
       />

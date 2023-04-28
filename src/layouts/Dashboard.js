@@ -42,7 +42,7 @@ function Dashboard() {
   const [idUser, setUser] = useState(12) // 12 or 18
 
   // - set a data source
-  const [dataSource, setDataSource] = useState('MOCK') // MOCK or BACK
+  const [dataSource, setDataSource] = useState('MOCK') // MOCK or DEV
 
   function switchUser() {
     idUser === 12 && setUser(18)
@@ -50,10 +50,11 @@ function Dashboard() {
   }
 
   function switchToMockSource() {
-    dataSource === 'BACK' && setDataSource('MOCK')
+    dataSource === 'DEV' && setDataSource('MOCK')
   }
-  function switchToBackSource() {
-    dataSource === 'MOCK' && setDataSource('BACK')
+  function switchToDevSource() {
+    dataSource === 'MOCK' && setDataSource('DEV')
+    console.log('tt')
   }
 
   // - retrieves information from a user
@@ -86,7 +87,7 @@ function Dashboard() {
           firstName={fUserData.userInfos && fUserData.userInfos.firstName}
           switchUser={switchUser}
           switchMockSource={switchToMockSource}
-          switchBackSource={switchToBackSource}
+          switchDevSource={switchToDevSource}
           dataSource={dataSource}
         />
         <SectionUser>

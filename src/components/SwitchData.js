@@ -36,7 +36,7 @@ const SourceMock = styled.div`
     color: #fff;
   }
 `
-const SourceBack = styled.div`
+const SourceDev = styled.div`
   position: absolute;
   height: 100%;
   width: 50%;
@@ -73,7 +73,7 @@ const SwitchUser = styled.div`
 
 function SwitchData({
   switchMockSource,
-  switchBackSource,
+  switchDevSource,
   switchUser,
   dataSource,
 }) {
@@ -86,12 +86,12 @@ function SwitchData({
         >
           Mock
         </SourceMock>
-        <SourceBack
-          onClick={switchBackSource}
-          className={dataSource === 'BACK' && 'active'}
+        <SourceDev
+          onClick={switchDevSource}
+          className={dataSource === 'DEV' && 'active'}
         >
-          Back
-        </SourceBack>
+          Dev
+        </SourceDev>
       </SwitchSource>
       <SwitchUser onClick={switchUser}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
