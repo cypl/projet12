@@ -43,6 +43,16 @@ const TitleGraph = styled.h3`
   top: 0;
   color: #222;
 `
+const TooltipWrapper = styled.ul`
+  background-color: #e60000;
+  padding: 7px 12px;
+`
+const TooltipItem = styled.li`
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+`
 
 function ActivityGraph({ data }) {
   function formatData(data) {
@@ -57,6 +67,18 @@ function ActivityGraph({ data }) {
       })
     }
   }
+
+  function CustomisedTooltip({ active, payload }) {
+    if (active && payload) {
+      return (
+        <TooltipWrapper>
+          <TooltipItem>{`${payload[1].value} kg`}</TooltipItem>
+          <TooltipItem>{`${payload[0].value} kCal`}</TooltipItem>
+        </TooltipWrapper>
+      )
+    }
+  }
+
   return (
     <ActivityWrapper className="chart_activity_wrapper">
       <ActivityWrapperMargin>
@@ -113,7 +135,11 @@ function ActivityGraph({ data }) {
               tick={false}
               orientation="left"
             />
-            <Tooltip />
+            <Tooltip
+              cursor={{ fill: '#C4C4C480' }}
+              wrapperStyle={{ outline: 'none' }}
+              content={<CustomisedTooltip />}
+            />
             <Legend
               iconType={'circle'}
               iconSize={'8px'}
