@@ -34,6 +34,15 @@ const ActivityWrapperMargin = styled.div`
     padding-top: 24px;
   }
 `
+const TitleGraph = styled.h3`
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  color: #222;
+`
 
 function ActivityGraph({ data }) {
   function formatData(data) {
@@ -51,6 +60,7 @@ function ActivityGraph({ data }) {
   return (
     <ActivityWrapper className="chart_activity_wrapper">
       <ActivityWrapperMargin>
+        <TitleGraph>Activité quotidienne</TitleGraph>
         <ResponsiveContainer
           className="chart_activity_container"
           width="100%"
@@ -75,9 +85,9 @@ function ActivityGraph({ data }) {
               dataKey="day"
               axisLine={false}
               tickLine={false}
+              tick={{ fill: '#9B9EAC' }}
               style={{
                 fontSize: '14px',
-                color: '#9B9EAC',
                 fontFamily: 'Roboto',
               }}
             />
@@ -87,10 +97,10 @@ function ActivityGraph({ data }) {
               domain={['dataMin -2', 'dataMax + 1']}
               axisLine={false}
               tickLine={false}
+              tick={{ fill: '#9B9EAC' }}
               orientation="right"
               style={{
                 fontSize: '14px',
-                color: '#9B9EAC',
                 fontFamily: 'Roboto',
               }}
             />
@@ -108,13 +118,15 @@ function ActivityGraph({ data }) {
               iconType={'circle'}
               iconSize={'8px'}
               align={'right'}
+              formatter={(value) => (
+                <span style={{ color: '#9B9EAC' }}>{value}</span>
+              )}
               wrapperStyle={{
                 width: '50%',
                 top: '-24px',
-                right: '0',
+                right: '-8px',
                 lineHeight: '24px',
                 fontSize: '14px',
-                color: '#9B9EAC',
                 fontFamily: 'Roboto',
               }}
             />
