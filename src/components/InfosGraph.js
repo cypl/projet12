@@ -13,7 +13,7 @@ const InfosItem = styled.div`
   position: relative;
   height: 100%;
   width: calc(33.33% - 13.33px);
-  background-color: pink;
+  background-color: #fbfbfb;
   border-radius: 5px;
 `
 
