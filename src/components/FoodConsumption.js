@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
+import { UserData } from '../dataModels/dataModels'
+import { useFetch } from '../api/api'
 
 const UserFood = styled.aside`
   position: absolute;
@@ -72,7 +75,18 @@ const FoodTxt2 = styled.p`
   color: #74798c;
 `
 
-function FoodConsumption({ calorie, protein, carbo, lipid }) {
+function FoodConsumption({ idUser, dataSource }) {
+  // - retrieves information from a user
+  const [dataUser, setDataUser] = useState({})
+  useFetch(
+    idUser,
+    `../data/mockedUsersInfos.json`,
+    `http://localhost:3000/user/${idUser}`,
+    dataSource,
+    setDataUser
+  )
+  const fUserData = new UserData(dataUser)
+
   return (
     <UserFood>
       <Food>
@@ -82,7 +96,9 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
             <IconEnergy color={'#FF0000'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{calorie}kCal</FoodTxt1>
+            <FoodTxt1>
+              {fUserData.keyData && fUserData.keyData.calorieCount} kCal
+            </FoodTxt1>
             <FoodTxt2>Calories</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -95,7 +111,9 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
             <IconProtein color={'#4AB8FF'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{protein}g</FoodTxt1>
+            <FoodTxt1>
+              {fUserData.keyData && fUserData.keyData.proteinCount} g
+            </FoodTxt1>
             <FoodTxt2>Protéines</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -108,7 +126,9 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
             <IconCarbo color={'#FDCC0C'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{carbo}g</FoodTxt1>
+            <FoodTxt1>
+              {fUserData.keyData && fUserData.keyData.carbohydrateCount} g
+            </FoodTxt1>
             <FoodTxt2>Glucides</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -121,7 +141,9 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
             <IconLipid color={'#FD5181'} />
           </FoodIconWrapper>
           <FoodTxt>
-            <FoodTxt1>{lipid}g</FoodTxt1>
+            <FoodTxt1>
+              {fUserData.keyData && fUserData.keyData.lipidCount} g
+            </FoodTxt1>
             <FoodTxt2>Lipides</FoodTxt2>
           </FoodTxt>
         </FoodContainer>
@@ -132,8 +154,6 @@ function FoodConsumption({ calorie, protein, carbo, lipid }) {
 export default FoodConsumption
 
 FoodConsumption.propTypes = {
-  calorie: PropTypes.number,
-  protein: PropTypes.number,
-  carbo: PropTypes.number,
-  lipid: PropTypes.number,
+  idUser: PropTypes.number,
+  dataSource: PropTypes.string,
 }

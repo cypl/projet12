@@ -1,5 +1,9 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { UserDataActivity } from '../dataModels/dataModels'
+import { useFetch } from '../api/api'
+
 import {
   BarChart,
   Bar,
@@ -54,7 +58,18 @@ const TooltipItem = styled.li`
   text-align: center;
 `
 
-function ActivityGraph({ data }) {
+function ActivityGraph({ idUser, dataSource }) {
+  // - retrieves activity from a user
+  const [dataActivity, setDataActivity] = useState({})
+  useFetch(
+    idUser,
+    `../data/mockedUsersActivity.json`,
+    `http://localhost:3000/user/${idUser}/activity`,
+    dataSource,
+    setDataActivity
+  )
+  const userDataActivity = new UserDataActivity(dataActivity)
+
   function formatData(data) {
     if (data.id !== undefined) {
       return data.sessions.map((session) => {
@@ -89,7 +104,7 @@ function ActivityGraph({ data }) {
           height="100%"
         >
           <BarChart
-            data={formatData(data)}
+            data={formatData(userDataActivity)}
             barGap={8}
             margin={{
               top: 20,
@@ -181,5 +196,6 @@ function ActivityGraph({ data }) {
 export default ActivityGraph
 
 ActivityGraph.propTypes = {
-  data: PropTypes.object,
+  idUser: PropTypes.number,
+  dataSource: PropTypes.string,
 }

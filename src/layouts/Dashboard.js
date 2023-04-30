@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import InfosGraph from '../components/InfosGraph'
 import FoodConsumption from '../components/FoodConsumption'
 import ActivityGraph from '../components/ActivityGraph'
-import { useFetch } from '../api/api'
-import { UserData, UserDataActivity } from '../dataModels/dataModels'
 
 const Main = styled.main`
   position: absolute;
@@ -52,55 +50,28 @@ function Dashboard() {
   function switchToMockSource() {
     dataSource === 'DEV' && setDataSource('MOCK')
   }
+
   function switchToDevSource() {
     dataSource === 'MOCK' && setDataSource('DEV')
-    console.log('tt')
   }
-
-  // - retrieves information from a user
-  const [dataUser, setDataUser] = useState({})
-  useFetch(
-    idUser,
-    `../data/mockedUsersInfos.json`,
-    `http://localhost:3000/user/${idUser}`,
-    dataSource,
-    setDataUser
-  )
-  const fUserData = new UserData(dataUser)
-
-  // - retrieves activity from a user
-  const [dataActivity, setDataActivity] = useState({})
-  useFetch(
-    idUser,
-    `../data/mockedUsersActivity.json`,
-    `http://localhost:3000/user/${idUser}/activity`,
-    dataSource,
-    setDataActivity
-  )
-  const fUserDataActivity = new UserDataActivity(dataActivity)
 
   return (
     <div className="App">
       <NavTop />
       <Main>
         <HeadUser
-          firstName={fUserData.userInfos && fUserData.userInfos.firstName}
+          idUser={idUser}
+          dataSource={dataSource}
           switchUser={switchUser}
           switchMockSource={switchToMockSource}
           switchDevSource={switchToDevSource}
-          dataSource={dataSource}
         />
         <SectionUser>
           <ContainerGraph>
-            <ActivityGraph data={fUserDataActivity} />
+            <ActivityGraph idUser={idUser} dataSource={dataSource} />
             <InfosGraph />
           </ContainerGraph>
-          <FoodConsumption
-            calorie={fUserData.keyData && fUserData.keyData.calorieCount}
-            protein={fUserData.keyData && fUserData.keyData.proteinCount}
-            carbo={fUserData.keyData && fUserData.keyData.carbohydrateCount}
-            lipid={fUserData.keyData && fUserData.keyData.lipidCount}
-          />
+          <FoodConsumption idUser={idUser} dataSource={dataSource} />
         </SectionUser>
       </Main>
       <NavLeft />

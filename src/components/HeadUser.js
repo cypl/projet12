@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { UserData } from '../dataModels/dataModels'
+import { useFetch } from '../api/api'
 import SwitchData from './SwitchData'
 
 const HeadingUser = styled.header`
@@ -29,16 +32,30 @@ const UserFirstName = styled.span`
 `
 
 function HeadUser({
-  firstName,
+  idUser,
+  dataSource,
   switchUser,
   switchMockSource,
   switchDevSource,
-  dataSource,
 }) {
+  // - retrieves information from a user
+  const [dataUser, setDataUser] = useState({})
+  useFetch(
+    idUser,
+    `../data/mockedUsersInfos.json`,
+    `http://localhost:3000/user/${idUser}`,
+    dataSource,
+    setDataUser
+  )
+  const fUserData = new UserData(dataUser)
+
   return (
     <HeadingUser>
       <HelloUser>
-        Bonjour <UserFirstName>{firstName}</UserFirstName>
+        Bonjour{' '}
+        <UserFirstName>
+          {fUserData.userInfos && fUserData.userInfos.firstName}
+        </UserFirstName>
       </HelloUser>
       <MessageUser>
         Félicitation ! Vous avez explosé vos objectifs hier 👏
@@ -56,9 +73,6 @@ function HeadUser({
 export default HeadUser
 
 HeadUser.propTypes = {
-  firstName: PropTypes.string,
-  switchUser: PropTypes.func,
-  switchMockSource: PropTypes.func,
-  switchBackSource: PropTypes.func,
+  idUser: PropTypes.number,
   dataSource: PropTypes.string,
 }
