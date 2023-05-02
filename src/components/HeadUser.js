@@ -40,12 +40,14 @@ function HeadUser({
 }) {
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
     `../data/mockedUsersInfos.json`,
     `http://localhost:3000/user/${idUser}`,
     dataSource,
-    setDataUser
+    setDataUser,
+    setDataLoading
   )
   const fUserData = new UserData(dataUser)
 
@@ -54,7 +56,9 @@ function HeadUser({
       <HelloUser>
         Bonjour{' '}
         <UserFirstName>
-          {fUserData.userInfos && fUserData.userInfos.firstName}
+          {isDataLoading
+            ? '...'
+            : fUserData.userInfos && fUserData.userInfos.firstName}
         </UserFirstName>
       </HelloUser>
       <MessageUser>

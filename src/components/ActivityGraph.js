@@ -61,12 +61,15 @@ const TooltipItem = styled.li`
 function ActivityGraph({ idUser, dataSource }) {
   // - retrieves activity from a user
   const [dataActivity, setDataActivity] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
+
   useFetch(
     idUser,
     `../data/mockedUsersActivity.json`,
     `http://localhost:3000/user/${idUser}/activity`,
     dataSource,
-    setDataActivity
+    setDataActivity,
+    setDataLoading
   )
   const userDataActivity = new UserDataActivity(dataActivity)
 

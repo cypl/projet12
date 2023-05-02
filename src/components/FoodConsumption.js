@@ -78,12 +78,14 @@ const FoodTxt2 = styled.p`
 function FoodConsumption({ idUser, dataSource }) {
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
     `../data/mockedUsersInfos.json`,
     `http://localhost:3000/user/${idUser}`,
     dataSource,
-    setDataUser
+    setDataUser,
+    setDataLoading
   )
   const fUserData = new UserData(dataUser)
 
@@ -97,7 +99,10 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {fUserData.keyData && fUserData.keyData.calorieCount} kCal
+              {isDataLoading
+                ? '...'
+                : fUserData.keyData && fUserData.keyData.calorieCount}{' '}
+              kCal
             </FoodTxt1>
             <FoodTxt2>Calories</FoodTxt2>
           </FoodTxt>
@@ -112,7 +117,10 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {fUserData.keyData && fUserData.keyData.proteinCount} g
+              {isDataLoading
+                ? '...'
+                : fUserData.keyData && fUserData.keyData.proteinCount}{' '}
+              g
             </FoodTxt1>
             <FoodTxt2>Protéines</FoodTxt2>
           </FoodTxt>
@@ -127,7 +135,10 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {fUserData.keyData && fUserData.keyData.carbohydrateCount} g
+              {isDataLoading
+                ? '...'
+                : fUserData.keyData && fUserData.keyData.carbohydrateCount}{' '}
+              g
             </FoodTxt1>
             <FoodTxt2>Glucides</FoodTxt2>
           </FoodTxt>
@@ -142,7 +153,10 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {fUserData.keyData && fUserData.keyData.lipidCount} g
+              {isDataLoading
+                ? '...'
+                : fUserData.keyData && fUserData.keyData.lipidCount}{' '}
+              g
             </FoodTxt1>
             <FoodTxt2>Lipides</FoodTxt2>
           </FoodTxt>

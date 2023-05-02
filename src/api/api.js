@@ -4,14 +4,22 @@ import { useEffect } from 'react'
  *
  * @param {*} id
  * @param {*} pathMock
- * @param {*} patchBack
+ * @param {*} pathDev
  * @param {*} dataSource
  * @param {*} setData
  */
 
-export const useFetch = (id, pathMock, patchBack, dataSource, setData) => {
+export const useFetch = (
+  id,
+  pathMock,
+  pathDev,
+  dataSource,
+  setData,
+  setDataLoading
+) => {
   useEffect(() => {
     async function fetchData(id) {
+      setDataLoading(true)
       try {
         // if dataSource is MOCK :
         if (dataSource === 'MOCK') {
@@ -22,15 +30,17 @@ export const useFetch = (id, pathMock, patchBack, dataSource, setData) => {
         }
         // if dataSource is BACK :
         else {
-          const response = await fetch(patchBack)
+          const response = await fetch(pathDev)
           const dataUser = await response.json()
           setData(dataUser.data)
         }
       } catch (error) {
+        setDataLoading(false)
         console.log(error)
       } finally {
+        setDataLoading(false)
       }
     }
     fetchData(id)
-  }, [id, pathMock, patchBack, dataSource, setData])
+  }, [id, pathMock, pathDev, dataSource, setData, setDataLoading])
 }
