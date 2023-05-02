@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { UserData } from '../dataModels/dataModels'
 import { useFetch } from '../api/api'
 import SwitchData from './SwitchData'
+import Loader from './Loader'
 
 const HeadingUser = styled.header`
   position: absolute;
@@ -56,9 +57,11 @@ function HeadUser({
       <HelloUser>
         Bonjour{' '}
         <UserFirstName>
-          {isDataLoading
-            ? '...'
-            : fUserData.userInfos && fUserData.userInfos.firstName}
+          {isDataLoading ? (
+            <Loader size={'28px'} color={'#e60000'} position={'inline'} />
+          ) : (
+            fUserData.userInfos && fUserData.userInfos.firstName
+          )}{' '}
         </UserFirstName>
       </HelloUser>
       <MessageUser>

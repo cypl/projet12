@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
 import { UserData } from '../dataModels/dataModels'
 import { useFetch } from '../api/api'
+import Loader from './Loader'
 
 const UserFood = styled.aside`
   position: absolute;
@@ -99,9 +100,11 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {isDataLoading
-                ? '...'
-                : fUserData.keyData && fUserData.keyData.calorieCount}{' '}
+              {isDataLoading ? (
+                <Loader position={'inline'} />
+              ) : (
+                fUserData.keyData && fUserData.keyData.calorieCount
+              )}{' '}
               kCal
             </FoodTxt1>
             <FoodTxt2>Calories</FoodTxt2>
@@ -117,9 +120,11 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {isDataLoading
-                ? '...'
-                : fUserData.keyData && fUserData.keyData.proteinCount}{' '}
+              {isDataLoading ? (
+                <Loader position={'inline'} />
+              ) : (
+                fUserData.keyData && fUserData.keyData.proteinCount
+              )}{' '}
               g
             </FoodTxt1>
             <FoodTxt2>Protéines</FoodTxt2>
@@ -135,9 +140,11 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {isDataLoading
-                ? '...'
-                : fUserData.keyData && fUserData.keyData.carbohydrateCount}{' '}
+              {isDataLoading ? (
+                <Loader position={'inline'} />
+              ) : (
+                fUserData.keyData && fUserData.keyData.carbohydrateCount
+              )}{' '}
               g
             </FoodTxt1>
             <FoodTxt2>Glucides</FoodTxt2>
@@ -153,9 +160,11 @@ function FoodConsumption({ idUser, dataSource }) {
           </FoodIconWrapper>
           <FoodTxt>
             <FoodTxt1>
-              {isDataLoading
-                ? '...'
-                : fUserData.keyData && fUserData.keyData.lipidCount}{' '}
+              {isDataLoading ? (
+                <Loader position={'inline'} />
+              ) : (
+                fUserData.keyData && fUserData.keyData.lipidCount
+              )}{' '}
               g
             </FoodTxt1>
             <FoodTxt2>Lipides</FoodTxt2>

@@ -20,26 +20,29 @@ export const useFetch = (
   useEffect(() => {
     async function fetchData(id) {
       setDataLoading(true)
-      try {
-        // if dataSource is MOCK :
-        if (dataSource === 'MOCK') {
-          const response = await fetch(pathMock)
-          const dataUsers = await response.json()
-          const dataUser = dataUsers[id]
-          setData(dataUser.data)
+      // ajouter un setTimeOut
+      setTimeout(async () => {
+        try {
+          // if dataSource is MOCK :
+          if (dataSource === 'MOCK') {
+            const response = await fetch(pathMock)
+            const dataUsers = await response.json()
+            const dataUser = dataUsers[id]
+            setData(dataUser.data)
+          }
+          // if dataSource is BACK :
+          else {
+            const response = await fetch(pathDev)
+            const dataUser = await response.json()
+            setData(dataUser.data)
+          }
+        } catch (error) {
+          setDataLoading(false)
+          console.log(error)
+        } finally {
+          setDataLoading(false)
         }
-        // if dataSource is BACK :
-        else {
-          const response = await fetch(pathDev)
-          const dataUser = await response.json()
-          setData(dataUser.data)
-        }
-      } catch (error) {
-        setDataLoading(false)
-        console.log(error)
-      } finally {
-        setDataLoading(false)
-      }
+      }, 1000)
     }
     fetchData(id)
   }, [id, pathMock, pathDev, dataSource, setData, setDataLoading])
