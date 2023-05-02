@@ -3,6 +3,8 @@ import { useFetch } from '../api/api'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
+import { UserData } from '../dataModels/dataModels'
+import Loader from './Loader'
 
 const UserFood = styled.aside`
   position: absolute;
@@ -74,44 +76,55 @@ const FoodTxt2 = styled.p`
   color: #74798c;
 `
 
-function FoodIntake({ userId, dataSource }) {
+function FoodIntake({ idUser, dataSource }) {
   // - retrieves information from a user
   const [dataUser, setDataUser] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
     `../data/mockedUsersInfos.json`,
     `http://localhost:3000/user/${idUser}`,
     dataSource,
-    setDataUser
+    setDataUser,
+    setDataLoading
   )
   const fUserData = new UserData(dataUser)
 
-  const foodName = ['Calories', 'Protéines', 'Glucides', 'Lipides']
+  function getDataByIndex(index) {
+    if (!isDataLoading) {
+      return Object.values(fUserData.keyData)[index]
+    }
+  }
+
+  const foodNames = ['Calories', 'Protéines', 'Glucides', 'Lipides']
   const foodIcons = [
-    <IconEnergy />,
-    <IconProtein />,
-    <IconCarbo />,
-    <IconLipid />,
+    <IconEnergy color={'#FF0000'} />,
+    <IconProtein color={'#4AB8FF'} />,
+    <IconCarbo color={'#FDCC0C'} />,
+    <IconLipid color={'#FD5181'} />,
   ]
   const foodColors = ['#FF0000', '#4AB8FF', '#FDCC0C', '#FD5181']
-
   return (
     <UserFood>
-      {foodName.map((foodItem, index) => (
+      {foodNames.map((foodName, index) => (
         <Food key={index}>
           <FoodContainer>
             <FoodIconWrapper>
               <FoodIconBg
-                style={{ backgroundColor: foodColors[{ index }] }}
+                style={{ backgroundColor: foodColors[index] }}
               ></FoodIconBg>
-              <IconEnergy color={foodColors[{ index }]} />
+              {foodIcons[index]}
             </FoodIconWrapper>
             <FoodTxt>
               <FoodTxt1>
-                {fUserData.keyData && fUserData.keyData.proteinCount}
+                {isDataLoading ? (
+                  <Loader position={'inline'} />
+                ) : (
+                  fUserData.keyData && getDataByIndex(index)
+                )}{' '}
                 {index === 0 ? 'kCal' : 'g'}
               </FoodTxt1>
-              <FoodTxt2>{foodItem}</FoodTxt2>
+              <FoodTxt2>{foodName}</FoodTxt2>
             </FoodTxt>
           </FoodContainer>
         </Food>

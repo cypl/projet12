@@ -4,7 +4,7 @@ import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
 import styled from 'styled-components'
 import InfosGraph from '../components/InfosGraph'
-import FoodConsumption from '../components/FoodConsumption'
+import FoodIntake from '../components/FoodIntake'
 import ActivityGraph from '../components/ActivityGraph'
 
 const Main = styled.main`
@@ -71,7 +71,7 @@ function Dashboard() {
             <ActivityGraph idUser={idUser} dataSource={dataSource} />
             <InfosGraph />
           </ContainerGraph>
-          <FoodConsumption idUser={idUser} dataSource={dataSource} />
+          <FoodIntake idUser={idUser} dataSource={dataSource} />
         </SectionUser>
       </Main>
       <NavLeft />
