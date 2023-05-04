@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 import HeadUser from '../components/HeadUser'
 import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
-import styled from 'styled-components'
 import FoodIntake from '../components/FoodIntake'
 import ActivityGraph from '../components/ActivityGraph'
+import SessionsGraph from '../components/SessionsGraph'
+import PerformanceGraph from '../components/PerformanceGraph'
 import TodayScoreGraph from '../components/TodayScoreGraph'
 
 const Main = styled.main`
@@ -87,8 +89,12 @@ function Dashboard() {
           <ContainerGraph>
             <ActivityGraph idUser={idUser} dataSource={dataSource} />
             <Infos>
-              <InfosItem></InfosItem>
-              <InfosItem></InfosItem>
+              <InfosItem>
+                <SessionsGraph idUser={idUser} dataSource={dataSource} />
+              </InfosItem>
+              <InfosItem>
+                <PerformanceGraph idUser={idUser} dataSource={dataSource} />
+              </InfosItem>
               <InfosItem>
                 <TodayScoreGraph idUser={idUser} dataSource={dataSource} />
               </InfosItem>

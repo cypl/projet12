@@ -77,6 +77,7 @@ function ActivityGraph({ idUser, dataSource }) {
   function formatData(data) {
     if (data.id !== undefined) {
       return data.sessions.map((session) => {
+        // eslint-disable-next-line no-unused-vars
         const [year, month, day] = session.day.split('-')
         const dayMonth = `${day}/${month}`
         return {

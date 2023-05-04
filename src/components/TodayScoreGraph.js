@@ -67,6 +67,8 @@ function TodayScoreGraph({ idUser, dataSource }) {
               outerRadius={80}
               stroke="#fbfbfb"
               cornerRadius={50}
+              animationBegin={0}
+              animationDuration={400}
             >
               <Cell fill={'#e60000'} />
               <Cell fill={'#fbfbfb'} />

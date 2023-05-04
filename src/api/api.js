@@ -19,7 +19,7 @@ export const useFetch = (
 ) => {
   useEffect(() => {
     async function fetchData(id) {
-      setDataLoading(true)
+      setDataLoading && setDataLoading(true)
       // ajouter un setTimeOut
       setTimeout(async () => {
         try {
@@ -37,10 +37,10 @@ export const useFetch = (
             setData(dataUser.data)
           }
         } catch (error) {
-          setDataLoading(false)
+          setDataLoading && setDataLoading(false)
           console.log(error)
         } finally {
-          setDataLoading(false)
+          setDataLoading && setDataLoading(false)
         }
       }, 1000)
     }
