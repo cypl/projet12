@@ -1,13 +1,7 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { UserData, UserDataSessions } from '../dataModels/dataModels'
 
-/**
- *
- * @param {*} id
- * @param {*} pathMock
- * @param {*} pathDev
- * @param {*} dataSource
- * @param {*} setData
- */
+const ENV = 'http://localhost:3000/user'
 
 export const useFetch = (
   id,
@@ -47,3 +41,42 @@ export const useFetch = (
     fetchData(id)
   }, [id, pathMock, pathDev, dataSource, setData, setDataLoading])
 }
+
+////////////////////////
+
+export function GetUserData(idUser, dataSource) {
+  const [dataUser, setDataUser] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
+  useFetch(
+    idUser,
+    `../data/mockedUsersInfos.json`,
+    `${ENV}/${idUser}`,
+    dataSource,
+    setDataUser,
+    setDataLoading
+  )
+  const data = new UserData(dataUser)
+  return { data, isDataLoading }
+}
+
+////////////////////////
+
+export function GetUserActivity(idUser, dataSource) {
+  const [dataSessions, setDataSessions] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
+  useFetch(
+    idUser,
+    `../data/mockedUsersActivity.json`,
+    `${ENV}/${idUser}/average-sessions`,
+    dataSource,
+    setDataSessions,
+    setDataLoading
+  )
+  const data = new UserDataSessions(dataSessions)
+  return { data, isDataLoading }
+}
+
+//   static getUserSessions() {}
+
+//   static getUserPerformance() {}
+// }

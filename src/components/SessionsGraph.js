@@ -34,9 +34,6 @@ function SessionsGraph({ idUser, dataSource }) {
     setDataLoading
   )
   const userDataSessions = new UserDataSessions(dataSessions)
-  if (dataSessions) {
-    console.log(userDataSessions.sessions)
-  }
 
   return (
     <ResponsiveContainer width="100%" height="100%">

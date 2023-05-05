@@ -8,6 +8,7 @@ import ActivityGraph from '../components/ActivityGraph'
 import SessionsGraph from '../components/SessionsGraph'
 import PerformanceGraph from '../components/PerformanceGraph'
 import TodayScoreGraph from '../components/TodayScoreGraph'
+import { GetUserData, GetUserActivity } from '../api/api'
 
 const Main = styled.main`
   position: absolute;
@@ -68,11 +69,22 @@ function Dashboard({
   switchMockSource,
   switchDevSource,
 }) {
+  // les données devrait arriver ici, et couler dans les composants.
+  // chaque appel doit renvoyer un objet avec les data + l'état du loader
+  const userData = GetUserData(idUser, dataSource)
+  console.log(userData.data)
+  console.log(userData.isDataLoading)
+
+  const userDataActivity = GetUserActivity(idUser, dataSource)
+  // console.log(userDataActivity.data)
+  // console.log(userDataActivity.isDataLoading)
+
   return (
     <div className="App">
       <NavTop />
       <Main>
         <HeadUser
+          userData={userData}
           idUser={idUser}
           dataSource={dataSource}
           switchUser={switchUser}
