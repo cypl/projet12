@@ -76,23 +76,10 @@ const FoodTxt2 = styled.p`
   color: #74798c;
 `
 
-function FoodIntake({ idUser, dataSource }) {
-  // - retrieves information from a user
-  const [dataUser, setDataUser] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  useFetch(
-    idUser,
-    `../data/mockedUsersInfos.json`,
-    `http://localhost:3000/user/${idUser}`,
-    dataSource,
-    setDataUser,
-    setDataLoading
-  )
-  const fUserData = new UserData(dataUser)
-
+function FoodIntake({ userData }) {
   function getDataByIndex(index) {
-    if (!isDataLoading) {
-      return Object.values(fUserData.keyData)[index]
+    if (!userData.isDataLoading) {
+      return Object.values(userData.data.keyData)[index]
     }
   }
 
@@ -117,10 +104,10 @@ function FoodIntake({ idUser, dataSource }) {
             </FoodIconWrapper>
             <FoodTxt>
               <FoodTxt1>
-                {isDataLoading ? (
+                {userData.isDataLoading ? (
                   <Loader position={'inline'} />
                 ) : (
-                  fUserData.keyData && getDataByIndex(index)
+                  userData.data.keyData && getDataByIndex(index)
                 )}{' '}
                 {index === 0 ? 'kCal' : 'g'}
               </FoodTxt1>
@@ -135,6 +122,5 @@ function FoodIntake({ idUser, dataSource }) {
 export default FoodIntake
 
 FoodIntake.propTypes = {
-  idUser: PropTypes.number,
-  dataSource: PropTypes.string,
+  userData: PropTypes.object,
 }

@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'
-import { UserData, UserDataSessions } from '../dataModels/dataModels'
+import {
+  UserData,
+  UserDataActivity,
+  UserDataSessions,
+  UserDataPerformance,
+} from '../dataModels/dataModels'
 
 const ENV = 'http://localhost:3000/user'
 
@@ -44,39 +49,65 @@ export const useFetch = (
 
 ////////////////////////
 
-export function GetUserData(idUser, dataSource) {
-  const [dataUser, setDataUser] = useState({})
+function FetchData(idUser, dataSource, sourceMock, sourceDev, dataModel) {
+  const [dataFetched, setData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
-    `../data/mockedUsersInfos.json`,
-    `${ENV}/${idUser}`,
+    sourceMock,
+    `${ENV}/${idUser}${sourceDev}`,
     dataSource,
-    setDataUser,
+    setData,
     setDataLoading
   )
-  const data = new UserData(dataUser)
+  const data = new dataModel(dataFetched)
   return { data, isDataLoading }
 }
 
 ////////////////////////
 
-export function GetUserActivity(idUser, dataSource) {
-  const [dataSessions, setDataSessions] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  useFetch(
+export function GetUserData(idUser, dataSource) {
+  return FetchData(
     idUser,
-    `../data/mockedUsersActivity.json`,
-    `${ENV}/${idUser}/average-sessions`,
     dataSource,
-    setDataSessions,
-    setDataLoading
+    `../data/mockedUsersInfos.json`,
+    `/`,
+    UserData
   )
-  const data = new UserDataSessions(dataSessions)
-  return { data, isDataLoading }
 }
 
-//   static getUserSessions() {}
+////////////////////////
 
-//   static getUserPerformance() {}
-// }
+export function GetUserActivity(idUser, dataSource) {
+  return FetchData(
+    idUser,
+    dataSource,
+    `../data/mockedUsersActivity.json`,
+    `/activity`,
+    UserDataActivity
+  )
+}
+
+////////////////////////
+
+export function GetUserSessions(idUser, dataSource) {
+  return FetchData(
+    idUser,
+    dataSource,
+    `../data/mockedUsersSessions.json`,
+    `/average-sessions`,
+    UserDataSessions
+  )
+}
+
+////////////////////////
+
+export function GetUserPerformance(idUser, dataSource) {
+  return FetchData(
+    idUser,
+    dataSource,
+    `../data/mockedUsersPerformance.json`,
+    `/performance`,
+    UserDataPerformance
+  )
+}

@@ -1,8 +1,5 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { useFetch } from '../api/api'
-import { UserData } from '../dataModels/dataModels'
 import Loader from './Loader'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
@@ -23,20 +20,7 @@ const TitleGraph = styled.h3`
   color: #222;
 `
 
-function TodayScoreGraph({ idUser, dataSource }) {
-  // - retrieves information from a user
-  const [dataUser, setDataUser] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  useFetch(
-    idUser,
-    `../data/mockedUsersInfos.json`,
-    `http://localhost:3000/user/${idUser}`,
-    dataSource,
-    setDataUser,
-    setDataLoading
-  )
-  const fUserData = new UserData(dataUser)
-
+function TodayScoreGraph({ userData }) {
   function formatTodayScore(data) {
     if (data.id !== undefined) {
       const score = [
@@ -46,12 +30,12 @@ function TodayScoreGraph({ idUser, dataSource }) {
       return score
     }
   }
-  const dataScore = formatTodayScore(fUserData)
+  const dataScore = formatTodayScore(userData.data)
 
   return (
     <ScoreWrapperMargin>
       <TitleGraph>Score</TitleGraph>
-      {isDataLoading ? (
+      {userData.isDataLoading ? (
         <Loader size={'28px'} />
       ) : (
         <ResponsiveContainer width="100%" height="100%">
@@ -101,6 +85,5 @@ function TodayScoreGraph({ idUser, dataSource }) {
 export default TodayScoreGraph
 
 TodayScoreGraph.propTypes = {
-  idUser: PropTypes.number,
-  dataSource: PropTypes.string,
+  userData: PropTypes.object,
 }

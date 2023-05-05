@@ -29,3 +29,14 @@ export class UserDataSessions {
     this.sessions = data.sessions
   }
 }
+
+/**
+ * retrieves average sessions from a user
+ */
+export class UserDataPerformance {
+  constructor(data) {
+    this.id = data.userId
+    this.kind = data.kind
+    this.data = data.data
+  }
+}

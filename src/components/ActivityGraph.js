@@ -1,8 +1,5 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { UserDataActivity } from '../dataModels/dataModels'
-import { useFetch } from '../api/api'
 import Loader from './Loader'
 
 import {
@@ -59,21 +56,7 @@ const TooltipItem = styled.li`
   text-align: center;
 `
 
-function ActivityGraph({ idUser, dataSource }) {
-  // - retrieves activity from a user
-  const [dataActivity, setDataActivity] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-
-  useFetch(
-    idUser,
-    `../data/mockedUsersActivity.json`,
-    `http://localhost:3000/user/${idUser}/activity`,
-    dataSource,
-    setDataActivity,
-    setDataLoading
-  )
-  const userDataActivity = new UserDataActivity(dataActivity)
-
+function ActivityGraph({ userDataActivity }) {
   function formatData(data) {
     if (data.id !== undefined) {
       return data.sessions.map((session) => {
@@ -103,7 +86,7 @@ function ActivityGraph({ idUser, dataSource }) {
     <ActivityWrapper className="chart_activity_wrapper">
       <ActivityWrapperMargin>
         <TitleGraph>Activité quotidienne</TitleGraph>
-        {isDataLoading ? (
+        {userDataActivity.isDataLoading ? (
           <Loader size={'28px'} />
         ) : (
           <ResponsiveContainer
@@ -112,7 +95,7 @@ function ActivityGraph({ idUser, dataSource }) {
             height="100%"
           >
             <BarChart
-              data={formatData(userDataActivity)}
+              data={formatData(userDataActivity.data)}
               barGap={8}
               margin={{
                 top: 20,
@@ -205,6 +188,5 @@ function ActivityGraph({ idUser, dataSource }) {
 export default ActivityGraph
 
 ActivityGraph.propTypes = {
-  idUser: PropTypes.number,
-  dataSource: PropTypes.string,
+  userDataActivity: PropTypes.object,
 }

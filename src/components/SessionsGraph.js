@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
 import {
   AreaChart,
   Area,
@@ -8,37 +9,19 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
-import { useFetch } from '../api/api'
-import { UserDataSessions } from '../dataModels/dataModels'
 
 function CustomisedTooltip({ active, payload }) {
   if (active && payload) {
-    return (
-      <span className="customised-tooltip">{`${payload[0].value} min`}</span>
-    )
+    return <span>{`${payload[0].value} min`}</span>
   }
   return null
 }
 
-function SessionsGraph({ idUser, dataSource }) {
-  // - retrieves average sessions from a user
-  const [dataSessions, setDataSessions] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-
-  useFetch(
-    idUser,
-    `../data/mockedUsersSessions.json`,
-    `http://localhost:3000/user/${idUser}/average-sessions`,
-    dataSource,
-    setDataSessions,
-    setDataLoading
-  )
-  const userDataSessions = new UserDataSessions(dataSessions)
-
+function SessionsGraph({ userDataSessions }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        data={userDataSessions.sessions}
+        data={userDataSessions.data.sessions}
         margin={{
           top: 0,
           right: 8,
@@ -63,7 +46,6 @@ function SessionsGraph({ idUser, dataSource }) {
             transform: 'scaleX(0.8)',
             transformOrigin: 'center',
           }}
-          //   allowDataOverflow={true}
         />
         <YAxis hide={true} domain={[0, 'dataMax + 45']} />
         <Tooltip
@@ -97,3 +79,7 @@ function SessionsGraph({ idUser, dataSource }) {
 }
 
 export default SessionsGraph
+
+SessionsGraph.propTypes = {
+  userDataSessions: PropTypes.object,
+}

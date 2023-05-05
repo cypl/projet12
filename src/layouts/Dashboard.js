@@ -1,5 +1,11 @@
-import { useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import {
+  GetUserData,
+  GetUserActivity,
+  GetUserSessions,
+  GetUserPerformance,
+} from '../api/api'
 import HeadUser from '../components/HeadUser'
 import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
@@ -8,7 +14,6 @@ import ActivityGraph from '../components/ActivityGraph'
 import SessionsGraph from '../components/SessionsGraph'
 import PerformanceGraph from '../components/PerformanceGraph'
 import TodayScoreGraph from '../components/TodayScoreGraph'
-import { GetUserData, GetUserActivity } from '../api/api'
 
 const Main = styled.main`
   position: absolute;
@@ -69,15 +74,12 @@ function Dashboard({
   switchMockSource,
   switchDevSource,
 }) {
-  // les données devrait arriver ici, et couler dans les composants.
-  // chaque appel doit renvoyer un objet avec les data + l'état du loader
+  // Appel des données, à envoyer dans les composants
   const userData = GetUserData(idUser, dataSource)
-  console.log(userData.data)
-  console.log(userData.isDataLoading)
-
+  console.log(userData)
   const userDataActivity = GetUserActivity(idUser, dataSource)
-  // console.log(userDataActivity.data)
-  // console.log(userDataActivity.isDataLoading)
+  const userDataSessions = GetUserSessions(idUser, dataSource)
+  const userDataPerformance = GetUserPerformance(idUser, dataSource)
 
   return (
     <div className="App">
@@ -85,7 +87,6 @@ function Dashboard({
       <Main>
         <HeadUser
           userData={userData}
-          idUser={idUser}
           dataSource={dataSource}
           switchUser={switchUser}
           switchMockSource={switchMockSource}
@@ -93,20 +94,24 @@ function Dashboard({
         />
         <SectionUser>
           <ContainerGraph>
-            <ActivityGraph idUser={idUser} dataSource={dataSource} />
+            <ActivityGraph userDataActivity={userDataActivity} />
             <Infos>
               <InfosGraph className="infosgraph_sessions">
-                <SessionsGraph idUser={idUser} dataSource={dataSource} />
+                <SessionsGraph userDataSessions={userDataSessions} />
               </InfosGraph>
               <InfosGraph className="infosgraph_performance">
                 <PerformanceGraph idUser={idUser} dataSource={dataSource} />
               </InfosGraph>
               <InfosGraph>
-                <TodayScoreGraph idUser={idUser} dataSource={dataSource} />
+                <TodayScoreGraph userData={userData} />
               </InfosGraph>
             </Infos>
           </ContainerGraph>
-          <FoodIntake idUser={idUser} dataSource={dataSource} />
+          <FoodIntake
+            userData={userData}
+            idUser={idUser}
+            dataSource={dataSource}
+          />
         </SectionUser>
       </Main>
       <NavLeft />
@@ -115,3 +120,11 @@ function Dashboard({
 }
 
 export default Dashboard
+
+Dashboard.propTypes = {
+  idUser: PropTypes.number,
+  dataSource: PropTypes.string,
+  switchUser: PropTypes.func,
+  switchMockSource: PropTypes.func,
+  switchDevSource: PropTypes.func,
+}
