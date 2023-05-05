@@ -19,3 +19,13 @@ export class UserDataActivity {
     this.sessions = data.sessions
   }
 }
+
+/**
+ * retrieves average sessions from a user
+ */
+export class UserDataSessions {
+  constructor(data) {
+    this.id = data.userId
+    this.sessions = data.sessions
+  }
+}

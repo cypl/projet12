@@ -45,35 +45,29 @@ const Infos = styled.div`
   height: calc(45% - 10px);
   width: 100%;
 `
-const InfosItem = styled.div`
+const InfosGraph = styled.div`
   position: relative;
   height: 100%;
   width: calc(33.33% - 13.33px);
   background-color: #fbfbfb;
   border-radius: 5px;
   position: relative;
+  overflow: hidden;
+  &.infosgraph_sessions {
+    background-color: #e60000;
+  }
+  &.infosgraph_performance {
+    background-color: #282d30;
+  }
 `
 
-function Dashboard() {
-  // - set a user
-  const [idUser, setUser] = useState(12) // 12 or 18
-
-  // - set a data source
-  const [dataSource, setDataSource] = useState('MOCK') // MOCK or DEV
-
-  function switchUser() {
-    idUser === 12 && setUser(18)
-    idUser === 18 && setUser(12)
-  }
-
-  function switchToMockSource() {
-    dataSource === 'DEV' && setDataSource('MOCK')
-  }
-
-  function switchToDevSource() {
-    dataSource === 'MOCK' && setDataSource('DEV')
-  }
-
+function Dashboard({
+  idUser,
+  dataSource,
+  switchUser,
+  switchMockSource,
+  switchDevSource,
+}) {
   return (
     <div className="App">
       <NavTop />
@@ -82,22 +76,22 @@ function Dashboard() {
           idUser={idUser}
           dataSource={dataSource}
           switchUser={switchUser}
-          switchMockSource={switchToMockSource}
-          switchDevSource={switchToDevSource}
+          switchMockSource={switchMockSource}
+          switchDevSource={switchDevSource}
         />
         <SectionUser>
           <ContainerGraph>
             <ActivityGraph idUser={idUser} dataSource={dataSource} />
             <Infos>
-              <InfosItem>
+              <InfosGraph className="infosgraph_sessions">
                 <SessionsGraph idUser={idUser} dataSource={dataSource} />
-              </InfosItem>
-              <InfosItem>
+              </InfosGraph>
+              <InfosGraph className="infosgraph_performance">
                 <PerformanceGraph idUser={idUser} dataSource={dataSource} />
-              </InfosItem>
-              <InfosItem>
+              </InfosGraph>
+              <InfosGraph>
                 <TodayScoreGraph idUser={idUser} dataSource={dataSource} />
-              </InfosItem>
+              </InfosGraph>
             </Infos>
           </ContainerGraph>
           <FoodIntake idUser={idUser} dataSource={dataSource} />
