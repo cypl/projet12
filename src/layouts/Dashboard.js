@@ -76,7 +76,6 @@ function Dashboard({
 }) {
   // Appel des données, à envoyer dans les composants
   const userData = GetUserData(idUser, dataSource)
-  console.log(userData)
   const userDataActivity = GetUserActivity(idUser, dataSource)
   const userDataSessions = GetUserSessions(idUser, dataSource)
   const userDataPerformance = GetUserPerformance(idUser, dataSource)

@@ -1,9 +1,6 @@
-import { useState } from 'react'
-import { useFetch } from '../api/api'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
-import { UserData } from '../dataModels/dataModels'
 import Loader from './Loader'
 
 const UserFood = styled.aside`
