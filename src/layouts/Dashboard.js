@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import {
-  GetUserData,
-  GetUserActivity,
-  GetUserSessions,
-  GetUserPerformance,
-} from '../api/api'
+import API from '../api'
 import HeadUser from '../components/HeadUser'
 import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
@@ -75,10 +70,10 @@ function Dashboard({
   switchDevSource,
 }) {
   // Appel des données, à envoyer dans les composants
-  const userData = GetUserData(idUser, dataSource)
-  const userDataActivity = GetUserActivity(idUser, dataSource)
-  const userDataSessions = GetUserSessions(idUser, dataSource)
-  const userDataPerformance = GetUserPerformance(idUser, dataSource)
+  const userData = API.getUserData(idUser, dataSource)
+  const userDataActivity = API.getUserActivity(idUser, dataSource)
+  const userDataSessions = API.getUserSessions(idUser, dataSource)
+  const userDataPerformance = API.getUserPerformance(idUser, dataSource)
 
   return (
     <div className="App">
@@ -99,7 +94,7 @@ function Dashboard({
                 <SessionsGraph userDataSessions={userDataSessions} />
               </InfosGraph>
               <InfosGraph className="infosgraph_performance">
-                <PerformanceGraph idUser={idUser} dataSource={dataSource} />
+                <PerformanceGraph userDataPerformance={userDataPerformance} />
               </InfosGraph>
               <InfosGraph>
                 <TodayScoreGraph userData={userData} />

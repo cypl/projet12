@@ -28,7 +28,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             <Dashboard
               idUser={idUser}
@@ -39,14 +39,14 @@ function App() {
             />
           }
         />
-        <Route path="/profil" element={<InProgress />} />
-        <Route path="/reglages" element={<InProgress />} />
-        <Route path="/communaute" element={<InProgress />} />
-        <Route path="/yoga" element={<InProgress />} />
-        <Route path="/natation" element={<InProgress />} />
-        <Route path="/cyclisme" element={<InProgress />} />
-        <Route path="/musculation" element={<InProgress />} />
-        <Route path="*" element={<Error404 />} />
+        <Route path='/profil' element={<InProgress />} />
+        <Route path='/reglages' element={<InProgress />} />
+        <Route path='/communaute' element={<InProgress />} />
+        <Route path='/yoga' element={<InProgress />} />
+        <Route path='/natation' element={<InProgress />} />
+        <Route path='/cyclisme' element={<InProgress />} />
+        <Route path='/musculation' element={<InProgress />} />
+        <Route path='*' element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   )

@@ -38,18 +38,18 @@ function TodayScoreGraph({ userData }) {
       {userData.isDataLoading ? (
         <Loader size={'28px'} />
       ) : (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width='100%' height='100%'>
           <PieChart width={400} height={400}>
             <Pie
               data={dataScore}
-              dataKey="todayScore"
+              dataKey='todayScore'
               startAngle={90}
               endAngle={450}
-              cx="50%"
-              cy="50%"
+              cx='50%'
+              cy='50%'
               innerRadius={70}
               outerRadius={80}
-              stroke="#fbfbfb"
+              stroke='#fbfbfb'
               cornerRadius={50}
               animationBegin={0}
               animationDuration={400}
@@ -57,21 +57,21 @@ function TodayScoreGraph({ userData }) {
               <Cell fill={'#e60000'} />
               <Cell fill={'#fbfbfb'} />
             </Pie>
-            <circle cx="50%" cy="50%" r="70" fill="#fff" />
-            <text textAnchor="middle" fontSize={15} fontWeight={400}>
+            <circle cx='50%' cy='50%' r='70' fill='#fff' />
+            <text textAnchor='middle' fontSize={15} fontWeight={400}>
               <tspan
-                x="50%"
-                y="46%"
+                x='50%'
+                y='46%'
                 fontSize={26}
                 fill={'#282D30'}
                 fontWeight={700}
               >
                 {dataScore && dataScore[0].todayScore * 100}%
               </tspan>
-              <tspan x="50%" y="56%" fill={'#9b9eac'}>
+              <tspan x='50%' y='56%' fill={'#9b9eac'}>
                 de votre
               </tspan>
-              <tspan x="50%" y="65%" fill={'#9b9eac'}>
+              <tspan x='50%' y='65%' fill={'#9b9eac'}>
                 objectif
               </tspan>
             </text>

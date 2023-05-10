@@ -62,7 +62,36 @@ const NavTopMenuItem = styled.li`
   }
 `
 
+const NavLinkTop = ({ path, text }) => (
+  <NavTopMenuItem>
+    <NavLink to={path}>{text}</NavLink>
+  </NavTopMenuItem>
+)
+
+/**
+ *
+ * @returns Component to render top navigation
+ */
 function NavTop() {
+  const routes = [
+    {
+      path: '/',
+      title: 'Accueil',
+    },
+    {
+      path: '/profil',
+      title: 'Profil',
+    },
+    {
+      path: '/reglages',
+      title: 'Réglages',
+    },
+    {
+      path: 'communaute',
+      title: 'Communauté',
+    },
+  ]
+
   return (
     <NavTopContainer>
       <LogoFig>
@@ -73,18 +102,9 @@ function NavTop() {
       </LogoFig>
       <NavTopMenu>
         <NavTopMenuUl>
-          <NavTopMenuItem>
-            <NavLink to="/">Accueil</NavLink>
-          </NavTopMenuItem>
-          <NavTopMenuItem>
-            <NavLink to="/profil">Profil</NavLink>
-          </NavTopMenuItem>
-          <NavTopMenuItem>
-            <NavLink to="/reglages">Réglages</NavLink>
-          </NavTopMenuItem>
-          <NavTopMenuItem>
-            <NavLink to="/communaute">Communauté</NavLink>
-          </NavTopMenuItem>
+          {routes.map((r, index) => (
+            <NavLinkTop path={r.path} text={r.title} key={index} />
+          ))}
         </NavTopMenuUl>
       </NavTopMenu>
     </NavTopContainer>

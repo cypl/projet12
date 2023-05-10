@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react'
-import {
-  UserData,
-  UserDataActivity,
-  UserDataSessions,
-  UserDataPerformance,
-} from '../dataModels/dataModels'
+import DataFactory from '../dataModels/dataModels'
 
 const ENV = 'http://localhost:3000/user'
 
-export const useFetch = (
+const useFetch = (
   id,
   pathMock,
   pathDev,
@@ -49,65 +44,69 @@ export const useFetch = (
 
 ////////////////////////
 
-function FetchData(idUser, dataSource, sourceMock, sourceDev, dataModel) {
+function FetchData(idUser, dataSource, sourceMock, path, dataType) {
   const [dataFetched, setData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
     sourceMock,
-    `${ENV}/${idUser}${sourceDev}`,
+    `${ENV}/${idUser}${path}`,
     dataSource,
     setData,
     setDataLoading
   )
-  const data = new dataModel(dataFetched)
+  const data = DataFactory(dataType, dataFetched)
   return { data, isDataLoading }
 }
 
 ////////////////////////
 
-export function GetUserData(idUser, dataSource) {
-  return FetchData(
-    idUser,
-    dataSource,
-    `../data/mockedUsersInfos.json`,
-    `/`,
-    UserData
-  )
+export const API = {
+  getUserData: (idUser, dataSource) => {
+    return FetchData(
+      idUser,
+      dataSource,
+      `../data/mockedUsersInfos.json`,
+      `/`,
+      'user'
+    )
+  },
+
+  ////////////////////////
+
+  getUserActivity: (idUser, dataSource) => {
+    return FetchData(
+      idUser,
+      dataSource,
+      `../data/mockedUsersActivity.json`,
+      `/activity`,
+      'activity'
+    )
+  },
+
+  ////////////////////////
+
+  getUserSessions: (idUser, dataSource) => {
+    return FetchData(
+      idUser,
+      dataSource,
+      `../data/mockedUsersSessions.json`,
+      `/average-sessions`,
+      'sessions'
+    )
+  },
+
+  ////////////////////////
+
+  getUserPerformance: (idUser, dataSource) => {
+    return FetchData(
+      idUser,
+      dataSource,
+      `../data/mockedUsersPerformance.json`,
+      `/performance`,
+      'performance'
+    )
+  },
 }
 
-////////////////////////
-
-export function GetUserActivity(idUser, dataSource) {
-  return FetchData(
-    idUser,
-    dataSource,
-    `../data/mockedUsersActivity.json`,
-    `/activity`,
-    UserDataActivity
-  )
-}
-
-////////////////////////
-
-export function GetUserSessions(idUser, dataSource) {
-  return FetchData(
-    idUser,
-    dataSource,
-    `../data/mockedUsersSessions.json`,
-    `/average-sessions`,
-    UserDataSessions
-  )
-}
-
-////////////////////////
-
-export function GetUserPerformance(idUser, dataSource) {
-  return FetchData(
-    idUser,
-    dataSource,
-    `../data/mockedUsersPerformance.json`,
-    `/performance`,
-    UserDataPerformance
-  )
-}
+export default API
