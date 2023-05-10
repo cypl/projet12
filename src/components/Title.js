@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const PageTitle = styled.h1`
   text-align: center;
@@ -15,3 +16,7 @@ function Title({ text }) {
 }
 
 export default Title
+
+Title.propTypes = {
+  text: PropTypes.string,
+}

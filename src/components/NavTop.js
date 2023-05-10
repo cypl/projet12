@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
 const NavTopContainer = styled.header`
@@ -67,6 +68,10 @@ const NavLinkTop = ({ path, text }) => (
     <NavLink to={path}>{text}</NavLink>
   </NavTopMenuItem>
 )
+NavLinkTop.propTypes = {
+  path: PropTypes.string,
+  text: PropTypes.string,
+}
 
 /**
  *

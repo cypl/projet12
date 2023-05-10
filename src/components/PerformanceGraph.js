@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import {
   Radar,
   RadarChart,
@@ -68,3 +69,7 @@ function PerformanceGraph({ userDataPerformance }) {
 }
 
 export default PerformanceGraph
+
+PerformanceGraph.propTypes = {
+  userDataPerformance: PropTypes.object,
+}

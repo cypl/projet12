@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import Title from './Title'
 import BtnTxt from './BtnText'
 
@@ -41,3 +42,10 @@ function ErrorSection({ title, errorText, btnText, btnTarget }) {
 }
 
 export default ErrorSection
+
+ErrorSection.propTypes = {
+  title: PropTypes.string,
+  errorText: PropTypes.string,
+  btnText: PropTypes.string,
+  btnTarget: PropTypes.string,
+}

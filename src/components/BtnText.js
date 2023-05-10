@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
 const Btn = styled(NavLink)`
@@ -26,3 +27,8 @@ function BtnTxt({ text, target }) {
 }
 
 export default BtnTxt
+
+BtnTxt.propTypes = {
+  text: PropTypes.string,
+  target: PropTypes.string,
+}
