@@ -4,12 +4,16 @@ import Dashboard from './layouts/Dashboard'
 import Error404 from './layouts/Error404'
 import InProgress from './layouts/InProgress'
 
+/**
+ * Displays the root of the app.
+ * @returns {JSX.Element} - The JSX markup for the App component.
+ */
 function App() {
-  // - set a user
-  const [idUser, setUser] = useState(12) // 12 or 18
+  // -> set a user by default (on page load), it should be 12 or 18
+  const [idUser, setUser] = useState(12)
 
-  // - set a data source
-  const [dataSource, setDataSource] = useState('MOCK') // MOCK or DEV
+  // -> set a data source by default (on page load), it should be "MOCK" or "DEV"
+  const [dataSource, setDataSource] = useState('MOCK')
 
   function switchUser() {
     idUser === 12 && setUser(18)
