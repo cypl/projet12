@@ -18,8 +18,8 @@ function TodayScoreGraph({ userData }) {
   function formatTodayScore(data) {
     if (data.id !== undefined) {
       const score = [
-        { todayScore: +data.todayScore }, // = score réel
-        { todayScore: 1 - +data.todayScore }, // = différence par rapport à 1
+        { todayScore: +data.todayScore },
+        { todayScore: 1 - +data.todayScore },
       ]
       return score
     }
