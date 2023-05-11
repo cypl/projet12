@@ -2,6 +2,61 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
+const NavLinkTop = ({ path, text }) => (
+  <NavTopMenuItem>
+    <NavLink to={path}>{text}</NavLink>
+  </NavTopMenuItem>
+)
+NavLinkTop.propTypes = {
+  path: PropTypes.string,
+  text: PropTypes.string,
+}
+
+/**
+ * Displays the top navigation
+ * @returns {JSX.Element} - The JSX markup for the NavTop component.
+ */
+function NavTop() {
+  const routes = [
+    {
+      path: '/',
+      title: 'Accueil',
+    },
+    {
+      path: '/profil',
+      title: 'Profil',
+    },
+    {
+      path: '/reglages',
+      title: 'Réglages',
+    },
+    {
+      path: 'communaute',
+      title: 'Communauté',
+    },
+  ]
+
+  return (
+    <NavTopContainer>
+      <LogoFig>
+        <LogoImg
+          src={'./assets/logo_sportsee.svg'}
+          alt={'logo sportSee'}
+        ></LogoImg>
+      </LogoFig>
+      <NavTopMenu>
+        <NavTopMenuUl>
+          {routes.map((r, index) => (
+            <NavLinkTop path={r.path} text={r.title} key={index} />
+          ))}
+        </NavTopMenuUl>
+      </NavTopMenu>
+    </NavTopContainer>
+  )
+}
+
+export default NavTop
+
 const NavTopContainer = styled.header`
   position: absolute;
   width: 100%;
@@ -62,58 +117,3 @@ const NavTopMenuItem = styled.li`
     background-color: #191919;
   }
 `
-
-const NavLinkTop = ({ path, text }) => (
-  <NavTopMenuItem>
-    <NavLink to={path}>{text}</NavLink>
-  </NavTopMenuItem>
-)
-NavLinkTop.propTypes = {
-  path: PropTypes.string,
-  text: PropTypes.string,
-}
-
-/**
- *
- * @returns Component to render top navigation
- */
-function NavTop() {
-  const routes = [
-    {
-      path: '/',
-      title: 'Accueil',
-    },
-    {
-      path: '/profil',
-      title: 'Profil',
-    },
-    {
-      path: '/reglages',
-      title: 'Réglages',
-    },
-    {
-      path: 'communaute',
-      title: 'Communauté',
-    },
-  ]
-
-  return (
-    <NavTopContainer>
-      <LogoFig>
-        <LogoImg
-          src={'./assets/logo_sportsee.svg'}
-          alt={'logo sportSee'}
-        ></LogoImg>
-      </LogoFig>
-      <NavTopMenu>
-        <NavTopMenuUl>
-          {routes.map((r, index) => (
-            <NavLinkTop path={r.path} text={r.title} key={index} />
-          ))}
-        </NavTopMenuUl>
-      </NavTopMenu>
-    </NavTopContainer>
-  )
-}
-
-export default NavTop
