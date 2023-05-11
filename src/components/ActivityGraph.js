@@ -12,7 +12,18 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
+/**
+ * Displays the Activity graph.
+ * @param {object} props - The props object containing the following properties:
+ * @param {object}  props.userDataActivity - The object containing the user data activity.
+ * @returns {JSX.Element} - The JSX markup for the ActivityGraph component.
+ */
 function ActivityGraph({ userDataActivity }) {
+  /**
+   * Data needs to be re-formated to be used as graph data.
+   * @param {object} data - The object containing the user data.
+   * @returns {array} - The array containing data used for the graph.
+   */
   function formatData(data) {
     if (data.id !== undefined) {
       return data.sessions.map((session) => {
