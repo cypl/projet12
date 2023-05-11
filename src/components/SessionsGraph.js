@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Loader from './Loader'
-
 import {
   AreaChart,
   Area,
@@ -11,23 +10,6 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-const ContainerSessionsGraph = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-`
-const TitleGraph = styled.h3`
-  line-height: 24px;
-  font-size: 15px;
-  font-weight: 500;
-  position: absolute;
-  left: 35px;
-  top: 15px;
-  color: #f79797;
-`
-
 function CustomisedTooltip({ active, payload }) {
   if (active && payload) {
     return <span>{`${payload[0].value} min`}</span>
@@ -35,12 +17,23 @@ function CustomisedTooltip({ active, payload }) {
   return null
 }
 
+/**
+ * Displays the Average Sessions graph.
+ * @param {object} props - The props object containing the following properties:
+ * @param {object}  props.userDataSessions - The object containing the user data sessions.
+ * @returns {JSX.Element} - The JSX markup for the SessionsGraph component.
+ */
 function SessionsGraph({ userDataSessions }) {
-  // weeks always starts on monday
-  function formatDataSessions() {
-    if (userDataSessions.data) {
+  /**
+   * Data needs to be re-formated to be used as graph data.
+   * -> backend documentation says “weeks always starts on monday”
+   * @param {object} data - The object containing the user data.
+   * @returns {array} - The array containing data used for the graph.
+   */
+  function formatDataSessions(data) {
+    if (data.data !== undefined) {
       const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
-      const sessions = userDataSessions.data.sessions
+      const sessions = data.data.sessions
       return sessions.map((session, index) => ({
         day: daysOfWeek[index],
         sessionLength: session.sessionLength,
@@ -59,7 +52,10 @@ function SessionsGraph({ userDataSessions }) {
       ) : (
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={userDataSessions.data.sessions && formatDataSessions()}
+            data={
+              userDataSessions.data.sessions &&
+              formatDataSessions(userDataSessions)
+            }
             margin={{
               top: 0,
               right: 8,
@@ -128,3 +124,20 @@ export default SessionsGraph
 SessionsGraph.propTypes = {
   userDataSessions: PropTypes.object,
 }
+
+const ContainerSessionsGraph = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`
+const TitleGraph = styled.h3`
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  position: absolute;
+  left: 35px;
+  top: 15px;
+  color: #f79797;
+`
