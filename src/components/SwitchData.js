@@ -1,6 +1,56 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
+/**
+ * Displays the SwitchData component, used to change user ID and data source in the UI.
+ * @param {object} props - The props object containing the following properties:
+ * @param {function} props.switchMockSource - The function to switch to mock data source.
+ * @param {function} props.switchDevSource - The function to switch to development data source.
+ * @param {function} props.switchUser - The function to switch user.
+ * @param {string} props.dataSource - The name of the data source.
+ * @returns {JSX.Element} - The JSX markup for the SwitchData component.
+ */
+function SwitchData({
+  switchMockSource,
+  switchDevSource,
+  switchUser,
+  dataSource,
+}) {
+  return (
+    <SwitchWrapper>
+      <SwitchSource>
+        <SourceMock
+          onClick={switchMockSource}
+          className={dataSource === 'MOCK' && 'active'}
+        >
+          Mock
+        </SourceMock>
+        <SourceDev
+          onClick={switchDevSource}
+          className={dataSource === 'DEV' && 'active'}
+        >
+          Dev
+        </SourceDev>
+      </SwitchSource>
+      <SwitchUser onClick={switchUser}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d="M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96H320v32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32V64H160C71.6 64 0 135.6 0 224zm512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96H192V352c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V448H352c88.4 0 160-71.6 160-160z" />
+        </svg>{' '}
+        user
+      </SwitchUser>
+    </SwitchWrapper>
+  )
+}
+
+export default SwitchData
+
+SwitchData.propTypes = {
+  switchUser: PropTypes.func,
+  switchMockSource: PropTypes.func,
+  switchBackSource: PropTypes.func,
+  dataSource: PropTypes.string,
+}
+
 const SwitchWrapper = styled.div`
   width: 80px;
   height: 50px;
@@ -70,44 +120,3 @@ const SwitchUser = styled.div`
     fill: #e60000;
   }
 `
-
-function SwitchData({
-  switchMockSource,
-  switchDevSource,
-  switchUser,
-  dataSource,
-}) {
-  return (
-    <SwitchWrapper>
-      <SwitchSource>
-        <SourceMock
-          onClick={switchMockSource}
-          className={dataSource === 'MOCK' && 'active'}
-        >
-          Mock
-        </SourceMock>
-        <SourceDev
-          onClick={switchDevSource}
-          className={dataSource === 'DEV' && 'active'}
-        >
-          Dev
-        </SourceDev>
-      </SwitchSource>
-      <SwitchUser onClick={switchUser}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path d="M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96H320v32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32V64H160C71.6 64 0 135.6 0 224zm512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96H192V352c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V448H352c88.4 0 160-71.6 160-160z" />
-        </svg>{' '}
-        user
-      </SwitchUser>
-    </SwitchWrapper>
-  )
-}
-
-export default SwitchData
-
-SwitchData.propTypes = {
-  switchUser: PropTypes.func,
-  switchMockSource: PropTypes.func,
-  switchBackSource: PropTypes.func,
-  dataSource: PropTypes.string,
-}
