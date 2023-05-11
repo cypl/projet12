@@ -13,7 +13,7 @@ import Loader from './Loader'
  * Displays the Performance graph.
  * @param {object} props - The props object containing the following properties:
  * @param {object}  props.userDataPerformance - The object containing the user data performance.
- * @returns {JSX.Element} - The JSX markup for the SessionsGraph component.
+ * @returns {JSX.Element} - The JSX markup for the Performance component.
  */
 function PerformanceGraph({ userDataPerformance }) {
   /**
