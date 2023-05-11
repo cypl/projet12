@@ -6,6 +6,53 @@ import { IconCyclisme } from '../utils/icons'
 import { IconNatation } from '../utils/icons'
 import { IconMusculation } from '../utils/icons'
 
+const NavLinkLeft = ({ path, icon }) => (
+  <IconNavBox>
+    <NavLink to={path}>{icon}</NavLink>
+  </IconNavBox>
+)
+NavLinkLeft.propTypes = {
+  path: PropTypes.string,
+  icon: PropTypes.object,
+}
+
+/**
+ * Displays the left navigation
+ * @returns {JSX.Element} - The JSX markup for the NavLeft component.
+ */
+function NavLeft() {
+  const iconsList = [
+    {
+      path: '/yoga',
+      icon: <IconMeditation color={'#e60000'} />,
+    },
+    {
+      path: '/natation',
+      icon: <IconNatation color={'#e60000'} />,
+    },
+    {
+      path: '/cyclisme',
+      icon: <IconCyclisme color={'#e60000'} />,
+    },
+    {
+      path: '/musculation',
+      icon: <IconMusculation color={'#e60000'} />,
+    },
+  ]
+
+  return (
+    <NavLeftContainer className="navleft">
+      <NavLeftIcons>
+        {iconsList.map((i, index) => (
+          <NavLinkLeft path={i.path} icon={i.icon} key={index} />
+        ))}
+      </NavLeftIcons>
+      <Copyright>Copyright, SportSee 2023</Copyright>
+    </NavLeftContainer>
+  )
+}
+export default NavLeft
+
 const NavLeftContainer = styled.footer`
   position: absolute;
   width: 110px;
@@ -56,45 +103,3 @@ const Copyright = styled.p`
   left: -15px;
   white-space: nowrap;
 `
-const NavLinkLeft = ({ path, icon }) => (
-  <IconNavBox>
-    <NavLink to={path}>{icon}</NavLink>
-  </IconNavBox>
-)
-NavLinkLeft.propTypes = {
-  path: PropTypes.string,
-  icon: PropTypes.object,
-}
-
-function NavLeft() {
-  const iconsList = [
-    {
-      path: '/yoga',
-      icon: <IconMeditation color={'#e60000'} />,
-    },
-    {
-      path: '/natation',
-      icon: <IconNatation color={'#e60000'} />,
-    },
-    {
-      path: '/cyclisme',
-      icon: <IconCyclisme color={'#e60000'} />,
-    },
-    {
-      path: '/musculation',
-      icon: <IconMusculation color={'#e60000'} />,
-    },
-  ]
-
-  return (
-    <NavLeftContainer className="navleft">
-      <NavLeftIcons>
-        {iconsList.map((i, index) => (
-          <NavLinkLeft path={i.path} icon={i.icon} key={index} />
-        ))}
-      </NavLeftIcons>
-      <Copyright>Copyright, SportSee 2023</Copyright>
-    </NavLeftContainer>
-  )
-}
-export default NavLeft
