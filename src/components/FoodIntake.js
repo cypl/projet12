@@ -3,6 +3,61 @@ import PropTypes from 'prop-types'
 import { IconCarbo, IconEnergy, IconLipid, IconProtein } from '../utils/icons'
 import Loader from './Loader'
 
+/**
+ * Displays the sidebar with food indicators.
+ * @param {object} props - The props object containing the following properties:
+ * @param {object}  props.userData - The object containing the user data.
+ * * @returns {JSX.Element} - The JSX markup for the FoodIntake component.
+ */
+function FoodIntake({ userData }) {
+  function getDataByIndex(index) {
+    if (!userData.isDataLoading) {
+      return Object.values(userData.data.keyData)[index]
+    }
+  }
+
+  const foodNames = ['Calories', 'Protéines', 'Glucides', 'Lipides']
+  const foodIcons = [
+    <IconEnergy color={'#FF0000'} />,
+    <IconProtein color={'#4AB8FF'} />,
+    <IconCarbo color={'#FDCC0C'} />,
+    <IconLipid color={'#FD5181'} />,
+  ]
+  const foodColors = ['#FF0000', '#4AB8FF', '#FDCC0C', '#FD5181']
+  return (
+    <UserFood>
+      {foodNames.map((foodName, index) => (
+        <Food key={index}>
+          <FoodContainer>
+            <FoodIconWrapper>
+              <FoodIconBg
+                style={{ backgroundColor: foodColors[index] }}
+              ></FoodIconBg>
+              {foodIcons[index]}
+            </FoodIconWrapper>
+            <FoodTxt>
+              <FoodTxt1>
+                {userData.isDataLoading ? (
+                  <Loader position={'inline'} />
+                ) : (
+                  userData.data.keyData && getDataByIndex(index)
+                )}{' '}
+                {index === 0 ? 'kCal' : 'g'}
+              </FoodTxt1>
+              <FoodTxt2>{foodName}</FoodTxt2>
+            </FoodTxt>
+          </FoodContainer>
+        </Food>
+      ))}
+    </UserFood>
+  )
+}
+export default FoodIntake
+
+FoodIntake.propTypes = {
+  userData: PropTypes.object,
+}
+
 const UserFood = styled.aside`
   position: absolute;
   right: 0;
@@ -72,52 +127,3 @@ const FoodTxt2 = styled.p`
   line-height: 22px;
   color: #74798c;
 `
-
-function FoodIntake({ userData }) {
-  function getDataByIndex(index) {
-    if (!userData.isDataLoading) {
-      return Object.values(userData.data.keyData)[index]
-    }
-  }
-
-  const foodNames = ['Calories', 'Protéines', 'Glucides', 'Lipides']
-  const foodIcons = [
-    <IconEnergy color={'#FF0000'} />,
-    <IconProtein color={'#4AB8FF'} />,
-    <IconCarbo color={'#FDCC0C'} />,
-    <IconLipid color={'#FD5181'} />,
-  ]
-  const foodColors = ['#FF0000', '#4AB8FF', '#FDCC0C', '#FD5181']
-  return (
-    <UserFood>
-      {foodNames.map((foodName, index) => (
-        <Food key={index}>
-          <FoodContainer>
-            <FoodIconWrapper>
-              <FoodIconBg
-                style={{ backgroundColor: foodColors[index] }}
-              ></FoodIconBg>
-              {foodIcons[index]}
-            </FoodIconWrapper>
-            <FoodTxt>
-              <FoodTxt1>
-                {userData.isDataLoading ? (
-                  <Loader position={'inline'} />
-                ) : (
-                  userData.data.keyData && getDataByIndex(index)
-                )}{' '}
-                {index === 0 ? 'kCal' : 'g'}
-              </FoodTxt1>
-              <FoodTxt2>{foodName}</FoodTxt2>
-            </FoodTxt>
-          </FoodContainer>
-        </Food>
-      ))}
-    </UserFood>
-  )
-}
-export default FoodIntake
-
-FoodIntake.propTypes = {
-  userData: PropTypes.object,
-}
