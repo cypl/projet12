@@ -3,6 +3,15 @@ import DataFactory from '../dataModels/dataModels'
 
 const ENV = 'http://localhost:3000/user'
 
+/**
+ * A React hook, used to fetch data
+ * @param {number} id - The ID of the current user.
+ * @param {string} pathMock - The path of the mock data source.
+ * @param {string} pathDev - The path of the development data source.
+ * @param {string} dataSource - The name of the data source.
+ * @param {function} setData - The function used to change the state dataFetched.
+ * @param {function} setDataLoading - The function used to change the state isDataLoading.
+ */
 const useFetch = (
   id,
   pathMock,
@@ -14,17 +23,18 @@ const useFetch = (
   useEffect(() => {
     async function fetchData(id) {
       setDataLoading && setDataLoading(true)
-      // ajouter un setTimeOut
+      // setTimeOut is only used to “fake” time load,
+      // and make the dataLoading state visible
       setTimeout(async () => {
         try {
-          // if dataSource is MOCK :
+          // if dataSource is "MOCK"
           if (dataSource === 'MOCK') {
             const response = await fetch(pathMock)
             const dataUsers = await response.json()
             const dataUser = dataUsers[id]
             setData(dataUser.data)
           }
-          // if dataSource is BACK :
+          // if dataSource is "BACK"
           else {
             const response = await fetch(pathDev)
             const dataUser = await response.json()
@@ -42,15 +52,22 @@ const useFetch = (
   }, [id, pathMock, pathDev, dataSource, setData, setDataLoading])
 }
 
-////////////////////////
-
-function FetchData(idUser, dataSource, sourceMock, path, dataType) {
+/**
+ * A function that returns fetched data, and data loading status .
+ * @param {number} idUser - The ID of the current user.
+ * @param {string} dataSource - The name of the data source.
+ * @param {string} pathMock - The path of the mock data source.
+ * @param {string} pathDev - The path of the development data source.
+ * @param {string} dataType - The type of data model.
+ * @returns {object} - An object containing data and data loading status.
+ */
+function FetchData(idUser, dataSource, pathMock, pathDev, dataType) {
   const [dataFetched, setData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   useFetch(
     idUser,
-    sourceMock,
-    `${ENV}/${idUser}${path}`,
+    pathMock,
+    `${ENV}/${idUser}${pathDev}`,
     dataSource,
     setData,
     setDataLoading
@@ -59,8 +76,10 @@ function FetchData(idUser, dataSource, sourceMock, path, dataType) {
   return { data, isDataLoading }
 }
 
-////////////////////////
-
+/**
+ * API is an object containing functions
+ * to retrieve a data object for every routes
+ */
 export const API = {
   getUserData: (idUser, dataSource) => {
     return FetchData(
@@ -72,8 +91,6 @@ export const API = {
     )
   },
 
-  ////////////////////////
-
   getUserActivity: (idUser, dataSource) => {
     return FetchData(
       idUser,
@@ -84,8 +101,6 @@ export const API = {
     )
   },
 
-  ////////////////////////
-
   getUserSessions: (idUser, dataSource) => {
     return FetchData(
       idUser,
@@ -95,8 +110,6 @@ export const API = {
       'sessions'
     )
   },
-
-  ////////////////////////
 
   getUserPerformance: (idUser, dataSource) => {
     return FetchData(

@@ -1,5 +1,5 @@
 /**
- * retrieves information from a user
+ * Format data for a user
  */
 export function UserData(data) {
   return {
@@ -11,7 +11,7 @@ export function UserData(data) {
 }
 
 /**
- * retrieves activity from a user
+ * Format data for a user activity
  */
 export function UserDataActivity(data) {
   return {
@@ -21,7 +21,7 @@ export function UserDataActivity(data) {
 }
 
 /**
- * retrieves average sessions from a user
+ * Format data for a user average sessions
  */
 export function UserDataSessions(data) {
   return {
@@ -31,7 +31,7 @@ export function UserDataSessions(data) {
 }
 
 /**
- * retrieves average sessions from a user
+ * Format data for a user performace
  */
 function UserDataPerformance(data) {
   return {
