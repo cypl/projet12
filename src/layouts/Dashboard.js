@@ -10,58 +10,16 @@ import SessionsGraph from '../components/SessionsGraph'
 import PerformanceGraph from '../components/PerformanceGraph'
 import TodayScoreGraph from '../components/TodayScoreGraph'
 
-const Main = styled.main`
-  position: absolute;
-  top: 90px;
-  left: 110px;
-  width: calc(100% - 110px);
-  height: calc(100% - 90px);
-  background-color: #fUserData;
-`
-const SectionUser = styled.section`
-  position: absolute;
-  bottom: 30px;
-  width: 90%;
-  max-width: 1100px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  height: calc(100% - 180px);
-  @media (max-width: 1024px) {
-    width: calc(100% - 60px);
-  }
-`
-const ContainerGraph = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 100%;
-  width: calc(80% - 10px);
-`
-const Infos = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  bottom: 0;
-  left: 0;
-  height: calc(45% - 10px);
-  width: 100%;
-`
-const InfosGraph = styled.div`
-  position: relative;
-  height: 100%;
-  width: calc(33.33% - 13.33px);
-  background-color: #fbfbfb;
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-  &.infosgraph_sessions {
-    background-color: #e60000;
-  }
-  &.infosgraph_performance {
-    background-color: #282d30;
-  }
-`
-
+/**
+ * Displays the home page.
+ * @param {object} props - The props object containing the following properties:
+ * @param {number} props.idUser - The ID of the user.
+ * @param {string} props.dataSource - The name of the data source.
+ * @param {function} props.switchUser - The function to switch user.
+ * @param {function} props.switchMockSource - The function to switch to mock data source.
+ * @param {function} props.switchDevSource - The function to switch to development data source.
+ * @returns {JSX.Element} - The JSX markup for the Dashboard component.
+ */
 function Dashboard({
   idUser,
   dataSource,
@@ -69,7 +27,7 @@ function Dashboard({
   switchMockSource,
   switchDevSource,
 }) {
-  // Appel des données, à envoyer dans les composants
+  // Calling data to send in components
   const userData = API.getUserData(idUser, dataSource)
   const userDataActivity = API.getUserActivity(idUser, dataSource)
   const userDataSessions = API.getUserSessions(idUser, dataSource)
@@ -122,3 +80,55 @@ Dashboard.propTypes = {
   switchMockSource: PropTypes.func,
   switchDevSource: PropTypes.func,
 }
+
+const Main = styled.main`
+  position: absolute;
+  top: 90px;
+  left: 110px;
+  width: calc(100% - 110px);
+  height: calc(100% - 90px);
+  background-color: #fUserData;
+`
+const SectionUser = styled.section`
+  position: absolute;
+  bottom: 30px;
+  width: 90%;
+  max-width: 1100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: calc(100% - 180px);
+  @media (max-width: 1024px) {
+    width: calc(100% - 60px);
+  }
+`
+const ContainerGraph = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: calc(80% - 10px);
+`
+const Infos = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  left: 0;
+  height: calc(45% - 10px);
+  width: 100%;
+`
+const InfosGraph = styled.div`
+  position: relative;
+  height: 100%;
+  width: calc(33.33% - 13.33px);
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  &.infosgraph_sessions {
+    background-color: #e60000;
+  }
+  &.infosgraph_performance {
+    background-color: #282d30;
+  }
+`
