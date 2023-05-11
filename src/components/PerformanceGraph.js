@@ -9,17 +9,20 @@ import {
 } from 'recharts'
 import Loader from './Loader'
 
-const ContainerPerformanceGraph = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-`
-
+/**
+ * Displays the Performance graph.
+ * @param {object} props - The props object containing the following properties:
+ * @param {object}  props.userDataPerformance - The object containing the user data performance.
+ * @returns {JSX.Element} - The JSX markup for the SessionsGraph component.
+ */
 function PerformanceGraph({ userDataPerformance }) {
-  function formatDataPerformance() {
-    if (userDataPerformance.data.kind) {
+  /**
+   * Data needs to be re-formated to be used as graph data.
+   * @param {object} data - The object containing the user data.
+   * @returns {array} - The array containing data used for the graph.
+   */
+  function formatDataPerformance(data) {
+    if (data.data.kind) {
       const allKindsFR = [
         'Cardio',
         'Energie',
@@ -28,7 +31,7 @@ function PerformanceGraph({ userDataPerformance }) {
         'Vitesse',
         'Intensité',
       ]
-      const allPerformances = userDataPerformance.data.data
+      const allPerformances = data.data.data
       return allPerformances.map((perf, index) => ({
         value: perf.value,
         kind: allKindsFR[index],
@@ -47,7 +50,10 @@ function PerformanceGraph({ userDataPerformance }) {
             cy="50%"
             outerRadius="55%"
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            data={userDataPerformance.data.kind && formatDataPerformance()}
+            data={
+              userDataPerformance.data.kind &&
+              formatDataPerformance(userDataPerformance)
+            }
           >
             <PolarGrid stroke="#fff" radialLines={false} />
             <PolarAngleAxis
@@ -73,3 +79,11 @@ export default PerformanceGraph
 PerformanceGraph.propTypes = {
   userDataPerformance: PropTypes.object,
 }
+
+const ContainerPerformanceGraph = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`
