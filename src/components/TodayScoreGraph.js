@@ -13,7 +13,7 @@ function TodayScoreGraph({ userData }) {
   /**
    * Data needs to be re-formated to be used as graph data.
    * @param {object} data - The object containing the user data.
-   * @returns {object} - The object containing data used for the graph.
+   * @returns {array} - The array containing data used for the graph.
    */
   function formatTodayScore(data) {
     if (data.id !== undefined) {
