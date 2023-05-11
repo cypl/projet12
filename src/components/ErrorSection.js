@@ -10,7 +10,7 @@ import BtnTxt from './BtnText'
  * @param {string}  props.errorText - The text describing the error.
  * @param {string}  props.btnText - The text of the button.
  * @param {string}  props.btnTarget - The target (route) of the button.
- * * @returns {JSX.Element} - The JSX markup for the ErrorSection component.
+ * @returns {JSX.Element} - The JSX markup for the ErrorSection component.
  */
 function ErrorSection({ title, errorText, btnText, btnTarget }) {
   return (
