@@ -2,6 +2,10 @@ import NavLeft from '../components/NavLeft'
 import NavTop from '../components/NavTop'
 import ErrorSection from '../components/ErrorSection'
 
+/**
+ * Displays the “In Progress” page.
+ * @returns {JSX.Element} - The JSX markup for the InProgress component.
+ */
 function InProgress() {
   return (
     <div className="App">
