@@ -141,4 +141,5 @@ const TitleGraph = styled.h3`
   left: 35px;
   top: 15px;
   color: #f79797;
+  z-index: 1;
 `
