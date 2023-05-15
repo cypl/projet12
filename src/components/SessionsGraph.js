@@ -17,6 +17,17 @@ function CustomisedTooltip({ active, payload }) {
   return null
 }
 
+function CustomisedActiveDot(props) {
+  const { cx, cy } = props
+  return (
+    <svg x={cx - 20} y={cy - 250} width="500" height="500">
+      <rect x="20" width="500" height="500" fill="rgba(0, 0, 0, 0.2)" />
+      <circle cx="20" cy="50%" r="10" fill="rgba(255, 255, 255, 0.4)" />
+      <circle cx="20" cy="50%" r="3" fill="rgba(255, 255, 255, 1)" />
+    </svg>
+  )
+}
+
 /**
  * Displays the Average Sessions graph.
  * @param {object} props - The props object containing the following properties:
@@ -63,12 +74,6 @@ function SessionsGraph({ userDataSessions }) {
               bottom: 15,
             }}
           >
-            <rect
-              width="28.6%"
-              x="71.4%"
-              height="100%"
-              fill="rgba(0,0,0, 0.2)"
-            />
             <XAxis
               dataKey="day"
               axisLine={false}
@@ -97,7 +102,7 @@ function SessionsGraph({ userDataSessions }) {
                 padding: '7px 12px',
                 outline: 'none',
               }}
-              cursor={{ stroke: 'rgba(255,255,255, 0.2)' }}
+              cursor={{ stroke: 'rgba(255,255,255, 0)' }}
             />
             <Area
               type="monotone"
@@ -106,11 +111,7 @@ function SessionsGraph({ userDataSessions }) {
               strokeWidth={2}
               fill="transparent"
               dot={false}
-              activeDot={{
-                stroke: 'rgba(255,255,255, 0.2)',
-                strokeWidth: 12,
-                r: 4,
-              }}
+              activeDot={CustomisedActiveDot}
             />
           </AreaChart>
         </ResponsiveContainer>
