@@ -9,11 +9,15 @@ import InProgress from './layouts/InProgress'
  * @returns {JSX.Element} - The JSX markup for the App component.
  */
 function App() {
+  // -> set production mode
+  // eslint-disable-next-line no-unused-vars
+  const [prod, setProd] = useState(false)
+
   // -> set a user by default (on page load), it should be 12 or 18
   const [idUser, setUser] = useState(12)
 
-  // -> set a data source by default (on page load), it should be "MOCK" or "DEV"
-  const [dataSource, setDataSource] = useState('MOCK')
+  // -> set a data source by default (on page load), it could be "MOCK" or "DEV"
+  const [dataSource, setDataSource] = useState(prod ? 'DEV' : 'MOCK')
 
   function switchUser() {
     idUser === 12 && setUser(18)
@@ -40,6 +44,7 @@ function App() {
               switchUser={switchUser}
               switchMockSource={switchToMockSource}
               switchDevSource={switchToDevSource}
+              prod={prod}
             />
           }
         />

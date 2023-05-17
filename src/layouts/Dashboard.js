@@ -18,6 +18,7 @@ import TodayScoreGraph from '../components/TodayScoreGraph'
  * @param {function} props.switchUser - The function to switch user.
  * @param {function} props.switchMockSource - The function to switch to mock data source.
  * @param {function} props.switchDevSource - The function to switch to development data source.
+ * @param {boolean} props.prod - Production mode = True/False
  * @returns {JSX.Element} - The JSX markup for the Dashboard component.
  */
 function Dashboard({
@@ -26,6 +27,7 @@ function Dashboard({
   switchUser,
   switchMockSource,
   switchDevSource,
+  prod,
 }) {
   // Calling data to send in components
   const userData = API.getUserData(idUser, dataSource)
@@ -43,6 +45,7 @@ function Dashboard({
           switchUser={switchUser}
           switchMockSource={switchMockSource}
           switchDevSource={switchDevSource}
+          prod={prod}
         />
         <SectionUser>
           <ContainerGraph>
@@ -59,11 +62,7 @@ function Dashboard({
               </InfosGraph>
             </Infos>
           </ContainerGraph>
-          <FoodIntake
-            userData={userData}
-            idUser={idUser}
-            dataSource={dataSource}
-          />
+          <FoodIntake userData={userData} />
         </SectionUser>
       </Main>
       <NavLeft />
@@ -79,6 +78,7 @@ Dashboard.propTypes = {
   switchUser: PropTypes.func,
   switchMockSource: PropTypes.func,
   switchDevSource: PropTypes.func,
+  prod: PropTypes.bool,
 }
 
 const Main = styled.main`

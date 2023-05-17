@@ -11,6 +11,7 @@ import Loader from './Loader'
  * @param {function} props.switchUser - The function to switch user.
  * @param {function} props.switchMockSource - The function to switch to mock data source.
  * @param {function} props.switchDevSource - The function to switch to development data source.
+ * @param {boolean} props.prod - Production mode = True/False
  * @returns {JSX.Element} - The JSX markup for the HeadUser component.
  */
 function HeadUser({
@@ -19,6 +20,7 @@ function HeadUser({
   switchUser,
   switchMockSource,
   switchDevSource,
+  prod,
 }) {
   return (
     <HeadingUser>
@@ -35,12 +37,14 @@ function HeadUser({
       <MessageUser>
         Félicitation ! Vous avez explosé vos objectifs hier 👏
       </MessageUser>
-      <SwitchData
-        switchMockSource={switchMockSource}
-        switchDevSource={switchDevSource}
-        switchUser={switchUser}
-        dataSource={dataSource}
-      />
+      {!prod && (
+        <SwitchData
+          switchMockSource={switchMockSource}
+          switchDevSource={switchDevSource}
+          switchUser={switchUser}
+          dataSource={dataSource}
+        />
+      )}
     </HeadingUser>
   )
 }
