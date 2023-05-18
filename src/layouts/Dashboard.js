@@ -87,7 +87,7 @@ const Main = styled.main`
   left: 110px;
   width: calc(100% - 110px);
   height: calc(100% - 90px);
-  background-color: #fUserData;
+  background-color: #fff;
 `
 const SectionUser = styled.section`
   position: absolute;
