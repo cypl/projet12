@@ -31,7 +31,7 @@ function NavTop() {
       title: 'Réglages',
     },
     {
-      path: 'communaute',
+      path: '/communaute',
       title: 'Communauté',
     },
   ]
