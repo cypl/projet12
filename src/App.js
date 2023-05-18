@@ -9,7 +9,11 @@ import InProgress from './layouts/InProgress'
  * @returns {JSX.Element} - The JSX markup for the App component.
  */
 function App() {
-  // -> set production mode
+  // -> Production mode :
+  // if set to false :
+  // -> UI will display a component for switching from data source (MOCK or DEV) and from user (id 12 or id 18)
+  // if set to true :
+  // -> UI will only display data source from the backend (data source DEV) and for user id 12
   // eslint-disable-next-line no-unused-vars
   const [prod, setProd] = useState(false)
 
