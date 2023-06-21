@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import Dashboard from './layouts/Dashboard'
-import Error404 from './layouts/Error404'
+import Error from './layouts/Error'
 import InProgress from './layouts/InProgress'
 
 /**
@@ -59,7 +59,8 @@ function App() {
         <Route path="/natation" element={<InProgress />} />
         <Route path="/cyclisme" element={<InProgress />} />
         <Route path="/musculation" element={<InProgress />} />
-        <Route path="*" element={<Error404 />} />
+        <Route path="/error/:error" element={<Error />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   )

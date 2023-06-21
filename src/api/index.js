@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import DataFactory from '../dataModels/dataModels'
+import { useNavigate } from 'react-router-dom'
 
 const ENV = 'http://localhost:3000/user'
 
@@ -20,6 +21,7 @@ const useFetch = (
   setData,
   setDataLoading
 ) => {
+  const navigate = useNavigate()
   useEffect(() => {
     async function fetchData(id) {
       setDataLoading && setDataLoading(true)
@@ -36,20 +38,30 @@ const useFetch = (
           }
           // if dataSource is "BACK"
           else {
-            const response = await fetch(pathDev)
+            const response = await fetch(pathDev).catch((err) => {
+              throw URIError('503')
+              // server is down ... For the moment \o/
+            })
+            if (!(response.ok && response.status < 300)) {
+              console.log(response.ok, response.status)
+              throw URIError('500')
+            }
+
             const dataUser = await response.json()
             setData(dataUser.data)
           }
         } catch (error) {
           setDataLoading && setDataLoading(false)
           console.log(error)
+          //useNavigate -> Error404
+          navigate('/error/' + error.message)
         } finally {
           setDataLoading && setDataLoading(false)
         }
       }, 1000)
     }
     fetchData(id)
-  }, [id, pathMock, pathDev, dataSource, setData, setDataLoading])
+  }, [id, pathMock, pathDev, dataSource, setData, setDataLoading, navigate])
 }
 
 /**
