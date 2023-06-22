@@ -46,14 +46,12 @@ const useFetch = (
               console.log(response.ok, response.status)
               throw URIError('500')
             }
-
             const dataUser = await response.json()
             setData(dataUser.data)
           }
         } catch (error) {
           setDataLoading && setDataLoading(false)
           console.log(error)
-          //useNavigate -> Error404
           navigate('/error/' + error.message)
         } finally {
           setDataLoading && setDataLoading(false)
