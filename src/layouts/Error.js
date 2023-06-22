@@ -13,8 +13,8 @@ function Error() {
   const params = useParams().error || '404'
   const errorMessages = new Map()
   errorMessages.set('404', "La page que vous recherchez n'existe pas.")
-  errorMessages.set('503', 'Ce ne sont pas les droïdes que vous recherchez.')
-  errorMessages.set('500', "ça a l'air cassé mais en vrai, on gère ...")
+  errorMessages.set('503', 'Erreur de connexion au serveur.')
+  errorMessages.set('500', 'Erreur interne du serveur.')
   return (
     <div className="App">
       <NavTop />

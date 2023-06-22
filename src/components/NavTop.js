@@ -40,7 +40,7 @@ function NavTop() {
     <NavTopContainer>
       <LogoFig>
         <LogoImg
-          src={'./assets/logo_sportsee.svg'}
+          src={'../assets/logo_sportsee.svg'}
           alt={'logo sportSee'}
         ></LogoImg>
       </LogoFig>
