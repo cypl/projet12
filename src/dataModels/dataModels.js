@@ -1,7 +1,7 @@
 /**
  * Format data for a user
  */
-export function UserData(data) {
+function UserData(data) {
   return {
     id: data.id,
     userInfos: data.userInfos,
@@ -13,7 +13,7 @@ export function UserData(data) {
 /**
  * Format data for a user activity
  */
-export function UserDataActivity(data) {
+function UserDataActivity(data) {
   return {
     id: data.userId,
     sessions: data.sessions,
@@ -23,7 +23,7 @@ export function UserDataActivity(data) {
 /**
  * Format data for a user average sessions
  */
-export function UserDataSessions(data) {
+function UserDataSessions(data) {
   return {
     id: data.userId,
     sessions: data.sessions,
