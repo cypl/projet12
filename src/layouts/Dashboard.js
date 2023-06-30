@@ -30,10 +30,10 @@ function Dashboard({
   prod,
 }) {
   // Calling data to send in components
-  const userData = API.getUserData(idUser, dataSource)
-  const userDataActivity = API.getUserActivity(idUser, dataSource)
-  const userDataSessions = API.getUserSessions(idUser, dataSource)
-  const userDataPerformance = API.getUserPerformance(idUser, dataSource)
+  const userData = API.GetUserData(idUser, dataSource)
+  const userDataActivity = API.GetUserActivity(idUser, dataSource)
+  const userDataSessions = API.GetUserSessions(idUser, dataSource)
+  const userDataPerformance = API.GetUserPerformance(idUser, dataSource)
 
   return (
     <div className="App">

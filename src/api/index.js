@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import DataFactory from '../dataModels/dataModels'
 import { useNavigate } from 'react-router-dom'
 
-const ENV = 'http://localhost:3000/user'
+const ENV = 'http://localhost:3000/users'
 
 /**
  * A React hook, used to fetch data
@@ -13,77 +13,66 @@ const ENV = 'http://localhost:3000/user'
  * @param {function} setData - The function used to change the state dataFetched.
  * @param {function} setDataLoading - The function used to change the state isDataLoading.
  */
-const useFetch = (
-  id,
-  pathMock,
-  pathDev,
-  dataSource,
-  setData,
-  setDataLoading
-) => {
+
+const useFetchData = (id, pathMock, pathDev, dataSource, dataType) => {
+  const [dataFetched, setData] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
+  const [isError, setError] = useState()
+  const [errorStatus, setErrorStatus] = useState(null)
+
   const navigate = useNavigate()
+  const timeoutRef = useRef(null)
+
   useEffect(() => {
-    async function fetchData(id) {
-      setDataLoading && setDataLoading(true)
-      // setTimeOut is only used to “fake” time load,
-      // and make the dataLoading state visible
-      setTimeout(async () => {
+    async function fetchData() {
+      setDataLoading(true)
+
+      if (timeoutRef.current) {
+        // timeout is cleared when error has occured,
+        // to avoid a second timeout before navigating to error page with error status
+        clearTimeout(timeoutRef.current)
+      }
+
+      timeoutRef.current = setTimeout(async () => {
         try {
+          let response
           // if dataSource is "MOCK"
           if (dataSource === 'MOCK') {
-            const response = await fetch(pathMock)
+            response = await fetch(pathMock)
             const dataUsers = await response.json()
             const dataUser = dataUsers[id]
             setData(dataUser.data)
+            setError(null)
+            setDataLoading(false)
           }
-          // if dataSource is "BACK"
-          else {
-            const response = await fetch(pathDev).catch((err) => {
-              throw URIError('503')
-              // server is down ... For the moment \o/
-            })
-            if (!(response.ok && response.status < 300)) {
-              console.log(response.ok, response.status)
-              throw URIError('500')
+          // if dataSource is "DEV"
+          if (dataSource === 'DEV') {
+            response = await fetch(pathDev)
+            // define an error status
+            if (!response.ok) {
+              setErrorStatus(response.status)
+              throw new Error(response.status)
             }
             const dataUser = await response.json()
             setData(dataUser.data)
+            setError(null)
+            setDataLoading(false)
           }
         } catch (error) {
-          setDataLoading && setDataLoading(false)
-          console.log(error)
-          navigate('/error/' + error.message)
-        } finally {
-          setDataLoading && setDataLoading(false)
+          setError(true)
+          setDataLoading(false)
+          if (errorStatus != null) {
+            navigate('/error/' + errorStatus) // add the errorStatus as a url param
+          }
         }
       }, 1000)
     }
-    fetchData(id)
-  }, [id, pathMock, pathDev, dataSource, setData, setDataLoading, navigate])
-}
+    fetchData()
+  }, [dataSource, id, navigate, pathDev, pathMock, errorStatus])
 
-/**
- * A function that returns fetched data, and data loading status .
- * @param {number} idUser - The ID of the current user.
- * @param {string} dataSource - The name of the data source.
- * @param {string} pathMock - The path of the mock data source.
- * @param {string} pathDev - The path of the development data source.
- * @param {string} dataType - The type of data model.
- * @returns {object} - An object containing data and data loading status.
- */
-function FetchData(idUser, dataSource, pathMock, pathDev, dataType) {
-  const [dataFetched, setData] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  useFetch(
-    idUser,
-    pathMock,
-    `${ENV}/${idUser}${pathDev}`,
-    dataSource,
-    setData,
-    setDataLoading
-  )
   const data = DataFactory(dataType, dataFetched)
-  return { data, isDataLoading }
+
+  return { data, isDataLoading, isError }
 }
 
 /**
@@ -91,44 +80,32 @@ function FetchData(idUser, dataSource, pathMock, pathDev, dataType) {
  * to retrieve a data object for every routes
  */
 export const API = {
-  getUserData: (idUser, dataSource) => {
-    return FetchData(
-      idUser,
-      dataSource,
-      `../data/mockedUsersInfos.json`,
-      `/`,
-      'user'
-    )
+  GetUserData: (idUser, dataSource) => {
+    const pathMock = `../data/mockedUsersInfos.json`
+    const pathDev = `${ENV}/${idUser}/`
+    const dataType = 'user'
+    return useFetchData(idUser, pathMock, pathDev, dataSource, dataType)
   },
 
-  getUserActivity: (idUser, dataSource) => {
-    return FetchData(
-      idUser,
-      dataSource,
-      `../data/mockedUsersActivity.json`,
-      `/activity`,
-      'activity'
-    )
+  GetUserActivity: (idUser, dataSource) => {
+    const pathMock = `../data/mockedUsersActivity.json`
+    const pathDev = `${ENV}/${idUser}/activity`
+    const dataType = 'activity'
+    return useFetchData(idUser, pathMock, pathDev, dataSource, dataType)
   },
 
-  getUserSessions: (idUser, dataSource) => {
-    return FetchData(
-      idUser,
-      dataSource,
-      `../data/mockedUsersSessions.json`,
-      `/average-sessions`,
-      'sessions'
-    )
+  GetUserSessions: (idUser, dataSource) => {
+    const pathMock = `../data/mockedUsersSessions.json`
+    const pathDev = `${ENV}/${idUser}/average-sessions`
+    const dataType = 'sessions'
+    return useFetchData(idUser, pathMock, pathDev, dataSource, dataType)
   },
 
-  getUserPerformance: (idUser, dataSource) => {
-    return FetchData(
-      idUser,
-      dataSource,
-      `../data/mockedUsersPerformance.json`,
-      `/performance`,
-      'performance'
-    )
+  GetUserPerformance: (idUser, dataSource) => {
+    const pathMock = `../data/mockedUsersPerformance.json`
+    const pathDev = `${ENV}/${idUser}/performance`
+    const dataType = 'performance'
+    return useFetchData(idUser, pathMock, pathDev, dataSource, dataType)
   },
 }
 
